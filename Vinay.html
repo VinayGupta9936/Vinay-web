@@ -1,106 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vinay Website</title>
+  <title>Vinay Website 📚</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
-    }
-
-    body {
-      background-image: url('v1.jpg'); /* check path */
+      background-image: url('v1.jpg'); /* Full screen background */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      color: #fff;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #fff;
-      position: relative;
-      overflow: hidden;
+      flex-direction: column;
     }
 
     .interface {
-      background-color: rgba(0,0,0,0.5);
-      padding: 20px 30px;          /* thoda kam padding */
-      border-radius: 15px;
       text-align: center;
-      max-width: 300px;            /* thoda chhota */
-      width: 80%;                  /* responsive */
-      z-index: 2;
-      position: relative;
+      max-width: 400px;
+      margin-top: 40px; /* thoda upar shift */
     }
 
     h1 {
-      margin-bottom: 25px;
-      font-size: 24px;             /* thoda chhota */
+      font-size: 28px;
       text-shadow: 2px 2px 5px #000;
+      margin-bottom: 40px;
     }
 
-    /* Premium black morphing buttons */
+    .portrait {
+      width: 150px;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      margin-bottom: 30px;
+    }
+
+    .blocks-container {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      align-items: center;
+    }
+
     .block-btn {
-      display: block;
-      padding: 12px;               /* thoda chhota */
-      margin: 12px 0;
-      width: 100%;
-      background: linear-gradient(270deg, #111, #222, #111, #333);
-      background-size: 400% 400%;
-      animation: btnGradient 8s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 25px;
+      border-radius: 12px;
       color: #fff;
       text-decoration: none;
-      border-radius: 12px;
       font-weight: bold;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-      transition: transform 0.3s, color 0.3s;
+      font-size: 18px;
+      width: 250px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .block-btn span.emoji {
+      margin-right: 12px;
+      font-size: 22px;
     }
 
     .block-btn:hover {
       transform: scale(1.05);
-      color: #00ccff;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
     }
 
-    @keyframes btnGradient {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
+    .pdf-btn {
+      background: linear-gradient(270deg, #ff6a00, #ee0979, #ff6a00);
+      background-size: 600% 600%;
+      animation: gradient1 8s ease infinite;
     }
 
-    /* Bottom see-through section */
-    .bottom-section {
+    .zip-btn {
+      background: linear-gradient(270deg, #00f260, #0575e6, #00f260);
+      background-size: 600% 600%;
+      animation: gradient2 8s ease infinite;
+    }
+
+    .app-btn {
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #ff9a9e);
+      background-size: 600% 600%;
+      animation: gradient3 8s ease infinite;
+    }
+
+    @keyframes gradient1 { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
+    @keyframes gradient2 { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
+    @keyframes gradient3 { 0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;} }
+
+    /* Bottom area for notes / greetings */
+    .bottom-area {
       width: 100%;
       text-align: center;
-      padding: 20px 0;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      font-size: 18px;
-      color: #fff;
-      text-shadow: 1px 1px 2px #000;
-      background-color: rgba(255,255,255,0.05);
+      padding: 20px 0; /* extra space */
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
       backdrop-filter: blur(5px);
+      margin-top: 40px;
+    }
+
+    .bottom-area p {
+      margin: 5px 0;
     }
 
   </style>
 </head>
 <body>
-<div class="top-section">
-  koi bhi quarry ya advice ke liye DM karo
-</div>
 
 <div class="interface">
-  <h1>Vinay Website 📚</h1>
-<a class="block-btn" href="Filelibrary.html" target="_blank">Go to PDF Library</a>
-<a class="block-btn" href="Zip.html" target="_blank">Go to ZIP Library</a>
-<a class="block-btn" href="Apk.html" target="_blank">Go to App Library</a>
+  <img class="portrait" src="vin.jpg" alt="Vinay">
+  <h1>Welcome to Vinay Website 📚</h1>
+
+  <div class="blocks-container">
+    <a class="block-btn pdf-btn" href="Filelibrary.html" target="_blank"><span class="emoji">📄</span> PDF Library</a>
+    <a class="block-btn zip-btn" href="Zip-library.html" target="_blank"><span class="emoji">🗂️</span> ZIP Library</a>
+    <a class="block-btn app-btn" href="App-library.html" target="_blank"><span class="emoji">📱</span> App Library</a>
+  </div>
 </div>
-<h1> guys for any suggestions contact me on intagram</h2>
+
+<<div class="bottom-area">
+  <p>© 2026 Vinay Gupta | All Rights Reserved</p>
+  <p style="color:red;">📝 Notes / Greetings / Info can go here</p>
+</div>
 
 </body>
 </html>
