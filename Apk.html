@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>App Library - Vinay Website</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url('img/vk.jpg'); /* same bg */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      position: relative;
+    }
+
+    h1 {
+      margin-top: 40px;
+      margin-bottom: 25px;
+      font-size: 32px;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    /* App cards container */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 90%;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    /* 3D black morphing app cards */
+    .app-card {
+      padding: 16px;
+      border-radius: 14px;
+      text-align: center;
+      background: linear-gradient(270deg, #0a0a0a, #1a1a1a, #000, #222);
+      background-size: 400% 400%;
+      animation: morph 8s ease infinite;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .app-card:hover {
+      transform: rotateY(12deg) rotateX(6deg) scale(1.06);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.8);
+      color: #00ccff;
+    }
+
+    @keyframes morph {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* Back button */
+    .back {
+      margin: 25px 0;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px #000;
+    }
+
+    .back:hover {
+      color: #00ccff;
+    }
+
+    /* Bottom glass section */
+    .bottom-section {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 18px 0;
+      text-align: center;
+      background-color: rgba(255,255,255,0.05);
+      backdrop-filter: blur(6px);
+      font-size: 16px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>📱 App Library</h1>
+
+<div class="app-container">
+  <a class="app-card" href="files/base-11.apk">My App 1</a>
+  <a class="app-card" href="files/app2.apk">My App 2</a>
+  <a class="app-card" href="files/app3.apk">My App 3</a>
+</div>
+
+<a class="back" href="vinay.html">⬅ Back to Main Page</a>
+
+<div class="bottom-section">
+  Tap on an app to download and install
+</div>
+
+</body>
+</html>

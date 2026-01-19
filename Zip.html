@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project (ZIP) Library - Vinay Website</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-image: url('img/vin.jpg'); /* check path */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      font-size: 32px;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .zip-list {
+      max-width: 500px;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+    }
+
+    /* Black morphing buttons */
+    .zip-list a {
+      display: block;
+      margin: 12px 0;
+      padding: 15px 25px;
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(270deg, #111, #222, #111, #333);
+      background-size: 400% 400%;
+      animation: btnGradient 8s ease infinite;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .zip-list a:hover {
+      transform: scale(1.05);
+      color: #00ccff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    @keyframes btnGradient {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    /* Bottom see-through section */
+    .bottom-section {
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-size: 18px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      background-color: rgba(255,255,255,0.05);
+      backdrop-filter: blur(5px);
+    }
+
+    /* Back link */
+    .back-link {
+      margin: 20px 0;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    .back-link:hover {
+      color: #00ccff;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Project (ZIP) Library</h1>
+
+<div class="zip-list">
+  <a href="files/zip.jpg" target="_blank">Project 1</a>
+  <a href="files/project2.zip" target="_blank">Project 2</a>
+  <a href="files/project3.zip" target="_blank">Project 3</a>
+</div>
+
+<a class="back-link" href="vinay.html">⬅ Back to Main Page</a>
+
+<div class="bottom-section">
+  All projects are ready for you. Click to view/download.
+</div>
+
+</body>
+</html>
