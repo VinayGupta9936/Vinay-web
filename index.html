@@ -2,103 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For My Bestie 💖</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',cursive;}
 body{
-  margin:0;height:100vh;overflow:hidden;text-align:center;
-  font-family:'Segoe UI',cursive;
+  height:100vh;
+  overflow-x:hidden;
+  text-align:center;
   background:radial-gradient(circle,#ff9acb,#ffd6e8,#ffeef5);
+  position:relative;
 }
 
 /* watermark */
 .watermark{
   position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:48px;color:rgba(255,0,120,.12);transform:rotate(-20deg);
+  font-size:36px;
+  color:rgba(255,0,120,.12);
+  transform:rotate(-20deg);
   pointer-events:none;
+  z-index:0;
 }
 
 /* pages */
-.page{display:none;padding-top:80px;position:relative;z-index:1}
-.active{display:block}
+.page{display:none;padding-top:60px;position:relative;z-index:1;}
+.active{display:block;}
 
 /* buttons */
 button{
-  padding:18px 45px;font-size:22px;border:none;border-radius:50px;
-  background:linear-gradient(45deg,#ff4d88,#ff0066);color:#fff;
-  cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.3);
+  padding:14px 35px;font-size:18px;border:none;border-radius:50px;
+  background:linear-gradient(45deg,#ff4d88,#ff0066);
+  color:white;cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.3);
 }
 
 /* envelope */
-#envelope{font-size:70px;cursor:pointer;}
+#envelope{
+  font-size:60px;
+  cursor:pointer;
+  animation:pulse 1.5s infinite;
+  margin-top:15px;
+}
 
-/* letter with background */
+/* letter */
 #letter{
-  #letter{
-  width:85%;
-  margin:40px auto;
-  padding:45px;
-  border-radius:30px;
-  font-size:26px;
-  line-height:1.6;
-  color:#fff;
-
+  width:90%;
+  max-width:480px;
+  margin:30px auto;
+  padding:25px;
+  border-radius:25px;
+  font-size:18px;
+  line-height:1.5;
+  color:white;
   background:
     linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
     url("bestie.jpg");
   background-size:cover;
   background-position:center;
-  background-repeat:no-repeat;
-
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-
-  /* smooth single open */
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
   transform:rotateX(-90deg) scale(.9);
   opacity:0;
-  transition: transform 1s ease-out, opacity 1s ease-out;
+  transition:transform 1s ease-out, opacity 1s ease-out;
 }
 
 #letter.show{
-  transform:rotateX(0deg) scale(1); /* sirf ek smooth open */
+  transform:rotateX(0deg) scale(1);
   opacity:1;
 }
-#letter.show{transform:rotateX(0) scale(1);opacity:1}
 
 .letter-content{
   background:rgba(0,0,0,.35);
-  padding:25px;border-radius:22px;
+  padding:15px;
+  border-radius:18px;
 }
 
-/* photo reveal */
+/* photo inside letter */
 #photo{
-  display:none;margin:25px auto;width:220px;height:220px;
-  border-radius:50%;object-fit:cover;
-  box-shadow:0 0 30px #ff4d88;
+  display:none;
+  margin:20px auto;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 0 25px #ff4d88;
   animation:zoom 1s ease;
 }
 
-/* music cards */
-.music{
-  background:rgba(255,255,255,.9);width:85%;
-  margin:20px auto;padding:25px;border-radius:30px;
-  box-shadow:0 15px 40px rgba(0,0,0,.3);
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d88;
+  animation:floatUp 6s linear infinite;
+  z-index:0;
 }
 
-/* hearts */
-.heart{position:fixed;bottom:-20px;color:#ff4d88;animation:floatUp 6s linear infinite}
-
-/* fireworks */
-.spark{
-  position:fixed;width:6px;height:6px;background:#ff0066;
-  border-radius:50%;animation:boom 1s linear forwards;
+/* music */
+.music{
+  background:rgba(255,255,255,.9);
+  width:85%;
+  max-width:400px;
+  margin:15px auto;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
 }
 
 /* sparkle */
 .sparkle{
   position:fixed;width:6px;height:6px;background:white;
-  border-radius:50%;box-shadow:0 0 12px #fff;
+  border-radius:50%;
+  box-shadow:0 0 10px #fff;
   animation:spark 1s ease forwards;
+  z-index:2;
+}
+
+/* fireworks */
+.spark{
+  position:fixed;width:5px;height:5px;background:#ff0066;
+  border-radius:50%;
+  animation:boom 1s linear forwards;
+  z-index:2;
 }
 
 /* animations */
@@ -125,15 +150,15 @@ button{
   <h2>Special Letter 💌</h2>
   <div id="envelope" onclick="openLetter()">💌</div>
 
-  <audio id="sparkleSound" src="audio3.mp3"></audio>
+  <audio id="mitrr" src="mitrr.mp3"></audio>
 
   <div id="letter">
     <div class="letter-content">
       Hey ❤️<br><br>
-Bestie ho tum meri zindagi ki wo aadat,
-Jo kabhi chhoot’ti nahi,
-Log chahe saath chhod dein,
-Par tumhari dosti kabhi toot’ti nahi 🤝💜</b><br><br>
+      तुम मेरे गम में साथी,
+तुम मेरी हँसी की वजह,
+
+or kal ke liye dorry bhi
       <button onclick="showPhoto()">Reveal Surprise 📸</button>
     </div>
   </div>
@@ -180,7 +205,7 @@ setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart"; h.innerHTML="❤";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(18+Math.random()*28)+"px";
+  h.style.fontSize=(14+Math.random()*22)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
 },300);
