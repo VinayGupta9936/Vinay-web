@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Units & Measurements — Class 11 Physics</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   APPLE-STYLE DESIGN SYSTEM
+   Clean · Minimal · Silky Smooth
+============================================= */
+:root {
+  --bg:        #000000;
+  --bg2:       #0a0a0a;
+  --surface:   #111111;
+  --surface2:  #1a1a1a;
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(255,255,255,0.14);
+  --text:      #f5f5f7;
+  --text2:     #a1a1a6;
+  --text3:     #6e6e73;
+  --blue:      #2997ff;
+  --blue-glow: rgba(41,151,255,0.18);
+  --green:     #30d158;
+  --yellow:    #ffd60a;
+  --orange:    #ff9f0a;
+  --pink:      #ff375f;
+  --purple:    #bf5af2;
+  --teal:      #5ac8fa;
+  --radius:    20px;
+  --radius-sm: 12px;
+  --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =============================================
+   NOISE TEXTURE OVERLAY
+============================================= */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* =============================================
+   FLOATING NAVBAR
+============================================= */
+.navbar {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(860px, calc(100vw - 32px));
+  z-index: 1000;
+  background: rgba(28, 28,30, 0.72);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  transition: all 0.4s var(--ease);
+}
+.nav-brand {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text2);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.nav-brand span { color: var(--blue); }
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links li a {
+  display: block;
+  padding: 5px 11px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text3);
+  text-decoration: none;
+  border-radius: 100px;
+  transition: all 0.25s var(--ease);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--text);
+  background: rgba(255,255,255,0.09);
+}
+.nav-links li a.active { color: var(--blue); }
+
+/* =============================================
+   HERO SECTION
+============================================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(41,151,255,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.4rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s var(--ease) forwards;
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.35s var(--ease) forwards;
+}
+.hero h1 .grad {
+  background: linear-gradient(135deg, #2997ff 0%, #5ac8fa 50%, #30d158 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text2);
+  font-weight: 400;
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.5s var(--ease) forwards;
+}
+
+.hero-chips {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.65s var(--ease) forwards;
+}
+.chip {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  background: var(--surface);
+  transition: all 0.3s var(--ease);
+  cursor: default;
+}
+.chip:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s ease forwards;
+}
+.scroll-hint span { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; }
+.scroll-dot {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--text3), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3;transform:scaleY(0.6)} 50%{opacity:1;transform:scaleY(1)} }
+
+/* =============================================
+   MAIN WRAPPER
+============================================= */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* =============================================
+   TABLE OF CONTENTS
+============================================= */
+.toc-section {
+  margin-bottom: 80px;
+}
+.toc-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease);
+}
+.toc-card:hover { border-color: var(--border2); }
+.toc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(41,151,255,0.5), transparent);
+}
+.toc-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 24px;
+}
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.toc-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.22s var(--ease);
+  cursor: pointer;
+}
+.toc-row:hover {
+  background: rgba(255,255,255,0.05);
+  transform: translateX(4px);
+}
+.toc-row.active-toc { background: var(--blue-glow); }
+.toc-row.active-toc .toc-n { color: var(--blue); }
+.toc-row.active-toc .toc-t { color: var(--text); }
+.toc-n {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--text3);
+  min-width: 22px;
+  transition: color 0.22s;
+}
+.toc-t {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text2);
+  transition: color 0.22s;
+}
+.toc-row:hover .toc-t { color: var(--text); }
+
+/* =============================================
+   SECTION CARDS
+============================================= */
+.sec {
+  margin-bottom: 24px;
+  scroll-margin-top: 80px;
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.sec.visible { opacity: 1; transform: translateY(0); }
+
+.sec-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), transform 0.3s var(--ease);
+}
+.sec-card:hover {
+  border-color: var(--border2);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 20px 60px rgba(0,0,0,0.5);
+  transform: translateY(-1px);
+}
+
+/* Color accent line per section */
+.sec-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.sec-card:hover::after { opacity: 1; }
+.c-blue::after   { background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+.c-green::after  { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+.c-yellow::after { background: linear-gradient(90deg, transparent, var(--yellow), transparent); }
+.c-orange::after { background: linear-gradient(90deg, transparent, var(--orange), transparent); }
+.c-pink::after   { background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+.c-purple::after { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+.c-teal::after   { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+
+/* Section top bar dot */
+.sec-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+.c-blue   .sec-dot { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+.c-green  .sec-dot { background: var(--green); box-shadow: 0 0 8px var(--green); }
+.c-yellow .sec-dot { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+.c-orange .sec-dot { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+.c-pink   .sec-dot { background: var(--pink); box-shadow: 0 0 8px var(--pink); }
+.c-purple .sec-dot { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.c-teal   .sec-dot { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+
+.sec-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 0;
+}
+.sec-meta { flex: 1; }
+.sec-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.sec-card h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+}
+.sec-icon-big {
+  font-size: 2.4rem;
+  line-height: 1;
+  margin-left: auto;
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.4s var(--ease-spring);
+}
+.sec-card:hover .sec-icon-big { opacity: 1; transform: scale(1.12) rotate(-4deg); }
+
+/* =============================================
+   PROSE
+============================================= */
+.prose {
+  font-size: 0.95rem;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.prose:last-child { margin-bottom: 0; }
+.prose em { color: var(--teal); font-style: normal; font-weight: 600; }
+.prose strong { color: var(--text); font-weight: 600; }
+
+/* =============================================
+   TABLE
+============================================= */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface2) transparent;
+}
+table { width: 100%; border-collapse: collapse; min-width: 420px; }
+thead { background: rgba(255,255,255,0.03); }
+th {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+td {
+  padding: 13px 18px;
+  font-size: 0.88rem;
+  color: var(--text2);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+  line-height: 1.5;
+}
+tr:last-child td { border: none; }
+td:first-child { color: var(--text); font-weight: 500; }
+tbody tr { transition: background 0.2s; }
+tbody tr:hover td { background: rgba(255,255,255,0.025); }
+
+/* =============================================
+   FORMULA BOX
+============================================= */
+.formula {
+  background: rgba(48,209,88,0.06);
+  border: 1px solid rgba(48,209,88,0.15);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin: 18px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.88rem;
+  color: var(--green);
+  line-height: 2;
+  white-space: pre-wrap;
+  transition: background 0.3s, border-color 0.3s;
+}
+.formula:hover {
+  background: rgba(48,209,88,0.09);
+  border-color: rgba(48,209,88,0.25);
+}
+.formula .fl {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(48,209,88,0.45);
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* =============================================
+   CALLOUT BLOCKS
+============================================= */
+.callout {
+  display: flex;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  margin: 18px 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  transition: transform 0.25s var(--ease);
+}
+.callout:hover { transform: translateX(3px); }
+.callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+.callout-tip   { background: rgba(41,151,255,0.07); border-left: 2px solid var(--blue); color: #a8c8ff; }
+.callout-warn  { background: rgba(255,214,10,0.06); border-left: 2px solid var(--yellow); color: #f0d890; }
+.callout-fun   { background: rgba(255,55,95,0.06); border-left: 2px solid var(--pink); color: #ffa0b4; }
+.callout-brain { background: rgba(191,90,242,0.07); border-left: 2px solid var(--purple); color: #d4a8f8; }
+
+.callout strong { color: inherit; filter: brightness(1.3); }
+
+/* =============================================
+   PILL GRID (SI units)
+============================================= */
+.pill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+.pill {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.3s var(--ease-spring);
+  cursor: default;
+}
+.pill:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: var(--border2);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+}
+.pill .pq   { font-size: 0.65rem; color: var(--text3); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+.pill .pu   { font-size: 1rem; font-weight: 700; color: var(--teal); letter-spacing: -0.01em; margin-bottom: 4px; }
+.pill .ps   { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--yellow); }
+
+/* =============================================
+   DIM CHIP
+============================================= */
+.dim {
+  display: inline-block;
+  background: rgba(255,159,10,0.1);
+  border: 1px solid rgba(255,159,10,0.22);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--orange);
+  transition: background 0.25s;
+}
+.dim:hover { background: rgba(255,159,10,0.18); }
+
+/* =============================================
+   MNEMONIC BOX
+============================================= */
+.mnem {
+  background: rgba(191,90,242,0.07);
+  border: 1px dashed rgba(191,90,242,0.25);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  margin: 18px 0;
+  transition: border-color 0.3s;
+}
+.mnem:hover { border-color: rgba(191,90,242,0.45); }
+.mnem .ml {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--purple);
+  display: block;
+  margin-bottom: 10px;
+}
+.mnem .mbig {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  display: block;
+}
+.mnem .msub { font-size: 0.87rem; color: #c4a8f8; line-height: 1.6; }
+
+/* =============================================
+   QUIZ CARD
+============================================= */
+.quiz {
+  background: rgba(90,200,250,0.05);
+  border: 1px solid rgba(90,200,250,0.14);
+  border-radius: var(--radius-sm);
+  padding: 20px 22px;
+  margin: 18px 0;
+}
+.quiz .ql {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 14px;
+}
+.qrow { margin-bottom: 12px; }
+.qrow:last-child { margin-bottom: 0; }
+.qq { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.qa { font-size: 0.87rem; color: #90d8f8; }
+
+/* =============================================
+   TAGS
+============================================= */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  transition: all 0.22s var(--ease);
+  cursor: default;
+}
+.tag:hover { transform: translateY(-1px); }
+.t-i { background: rgba(255,214,10,0.1); color: var(--yellow); border: 1px solid rgba(255,214,10,0.25); }
+.t-m { background: rgba(191,90,242,0.1); color: var(--purple); border: 1px solid rgba(191,90,242,0.25); }
+.t-e { background: rgba(255,55,95,0.1); color: var(--pink); border: 1px solid rgba(255,55,95,0.25); }
+.t-n { background: rgba(48,209,88,0.1); color: var(--green); border: 1px solid rgba(48,209,88,0.25); }
+
+/* =============================================
+   BACK TO TOP
+============================================= */
+#btt {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(28,28,30,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(12px) scale(0.85);
+  transition: all 0.4s var(--ease-spring);
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+#btt.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+#btt:hover {
+  background: rgba(41,151,255,0.2);
+  border-color: rgba(41,151,255,0.4);
+  color: var(--blue);
+  transform: translateY(-3px) scale(1.08);
+}
+
+/* =============================================
+   SECTION DIVIDER
+============================================= */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 60px 0;
+}
+
+/* =============================================
+   SECTION LABEL (chapter marker)
+============================================= */
+.chapter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text3);
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.chapter-label::before, .chapter-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* =============================================
+   FOOTER
+============================================= */
+footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+}
+.footer-logo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.footer-sub {
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-top: 6px;
+}
+
+/* =============================================
+   ANIMATIONS
+============================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =============================================
+   RESPONSIVE
+============================================= */
+@media (max-width: 640px) {
+  .navbar { padding: 0 14px; }
+  .nav-links li a { padding: 4px 8px; font-size: 0.68rem; }
+  .nav-brand { display: none; }
+  .hero h1 { font-size: 2.8rem; }
+  .sec-card { padding: 24px 20px; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .toc-card { padding: 24px; }
+  .pill-grid { grid-template-columns: repeat(auto-fill, minmax(90px,1fr)); }
+  #btt { bottom: 16px; right: 16px; width: 40px; height: 40px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =============================================
+     FLOATING NAVBAR
+============================================= -->
+<nav class="navbar">
+  <div class="nav-brand">Class XI · <span>Physics</span> · Ch.2</div>
+  <ul class="nav-links">
+    <li><a href="#s1">Quantities</a></li>
+    <li><a href="#s2">Units</a></li>
+    <li><a href="#s3">SI Units</a></li>
+    <li><a href="#s4">Dimensions</a></li>
+    <li><a href="#s5">Analysis</a></li>
+    <li><a href="#s6">Sig Figs</a></li>
+    <li><a href="#s7">Errors</a></li>
+    <li><a href="#s8">Accuracy</a></li>
+    <li><a href="#s9">Vernier</a></li>
+    <li><a href="#s10">Screw</a></li>
+    <li><a href="#s11">Revision</a></li>
+  </ul>
+</nav>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-eyebrow">Class 11 · Physics · Chapter 2</p>
+  <h1>Units &amp;<br><span class="grad">Measurements</span></h1>
+  <p class="hero-sub">Complete topper notes — every topic, every formula, every trick. Exam-ready. 🎯</p>
+  <div class="hero-chips">
+    <span class="chip">📏 11 Topics</span>
+    <span class="chip">🔢 All Formulas</span>
+    <span class="chip">🧠 Mnemonics</span>
+    <span class="chip">⭐ Exam Tags</span>
+    <span class="chip">💡 Fun Facts</span>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- =============================================
+     MAIN CONTENT
+============================================= -->
+<main class="main">
+
+  <!-- TOC -->
+  <div class="toc-section">
+    <div class="chapter-label">Topics at a Glance</div>
+    <div class="toc-card">
+      <div class="toc-label">📋 Contents</div>
+      <div class="toc-grid">
+        <a class="toc-row" href="#s1"><span class="toc-n">01</span><span class="toc-t">Physical Quantities</span></a>
+        <a class="toc-row" href="#s2"><span class="toc-n">02</span><span class="toc-t">Units &amp; Systems</span></a>
+        <a class="toc-row" href="#s3"><span class="toc-n">03</span><span class="toc-t">7 SI Base Units</span></a>
+        <a class="toc-row" href="#s4"><span class="toc-n">04</span><span class="toc-t">Dimensions &amp; Formulae</span></a>
+        <a class="toc-row" href="#s5"><span class="toc-n">05</span><span class="toc-t">Dimensional Analysis</span></a>
+        <a class="toc-row" href="#s6"><span class="toc-n">06</span><span class="toc-t">Significant Figures</span></a>
+        <a class="toc-row" href="#s7"><span class="toc-n">07</span><span class="toc-t">Errors in Measurement</span></a>
+        <a class="toc-row" href="#s8"><span class="toc-n">08</span><span class="toc-t">Accuracy vs Precision</span></a>
+        <a class="toc-row" href="#s9"><span class="toc-n">09</span><span class="toc-t">Vernier Callipers</span></a>
+        <a class="toc-row" href="#s10"><span class="toc-n">10</span><span class="toc-t">Screw Gauge</span></a>
+        <a class="toc-row" href="#s11"><span class="toc-n">11</span><span class="toc-t">Quick Revision Blast</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S1: Physical Quantities ───── -->
+  <div class="sec" id="s1">
+    <div class="sec-card c-blue">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 01 / 11</div>
+          <h2>Physical Quantities</h2>
+        </div>
+        <div class="sec-icon-big">📏</div>
+      </div>
+      <p class="prose">A <em>physical quantity</em> is anything that can be <strong>measured</strong>. Every physical quantity = a number × a unit. Without a unit, a number means nothing in physics.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Type</th><th>Definition</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Fundamental</td><td>Cannot be derived from other quantities</td><td>Length, Mass, Time, Temperature, Current, Luminosity, Amount</td></tr>
+          <tr><td>Derived</td><td>Expressed in terms of fundamental ones</td><td>Speed, Force, Energy, Pressure, Volume, Density</td></tr>
+          <tr><td>Scalar</td><td>Has only magnitude, no direction</td><td>Mass, Temperature, Distance, Speed, Energy</td></tr>
+          <tr><td>Vector</td><td>Has both magnitude and direction</td><td>Displacement, Velocity, Force, Acceleration, Momentum</td></tr>
+        </tbody>
+      </table></div>
+      <div class="mnem">
+        <span class="ml">🧠 Mnemonic — 7 Fundamental Quantities</span>
+        <span class="mbig">"Lazy Men Tend To Ignore All Clocks"</span>
+        <span class="msub"><strong>L</strong>ength · <strong>M</strong>ass · <strong>T</strong>ime · <strong>T</strong>emperature · <strong>I</strong>ntensity (Luminous) · <strong>A</strong>mount · <strong>C</strong>urrent (Electric)</span>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Important</span>
+        <span class="tag t-e">🎯 1-mark Q</span>
+        <span class="tag t-m">🧠 Mnemonic</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S2: Systems of Units ───── -->
+  <div class="sec" id="s2">
+    <div class="sec-card c-yellow">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 02 / 11</div>
+          <h2>Units &amp; Systems of Units</h2>
+        </div>
+        <div class="sec-icon-big">⚖️</div>
+      </div>
+      <p class="prose">A <em>unit</em> is a standard reference to express a physical quantity. Four major systems of units exist:</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>System</th><th>Length</th><th>Mass</th><th>Time</th><th>Used In</th></tr></thead>
+        <tbody>
+          <tr><td>CGS</td><td>centimetre</td><td>gram</td><td>second</td><td>Old European science</td></tr>
+          <tr><td>FPS (British)</td><td>foot</td><td>pound</td><td>second</td><td>UK / USA engineering</td></tr>
+          <tr><td>MKS</td><td>metre</td><td>kilogram</td><td>second</td><td>Practical physics</td></tr>
+          <tr><td>SI ✅</td><td>metre</td><td>kilogram</td><td>second</td><td>Modern science worldwide</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-fun">
+        <span class="callout-icon">🚀</span>
+        <div><strong>NASA's $327M Lesson:</strong> In 1999, the Mars Climate Orbiter crashed because one team used imperial units (pound·s) and another used SI (newton·s). Units matter — always!</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Important</span>
+        <span class="tag t-e">🎯 3-mark Q</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S3: 7 SI Base Units ───── -->
+  <div class="sec" id="s3">
+    <div class="sec-card c-teal">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 03 / 11</div>
+          <h2>The 7 SI Base Units</h2>
+        </div>
+        <div class="sec-icon-big">🌡️</div>
+      </div>
+      <p class="prose">These 7 units are the <em>foundation of all scientific measurement</em>. Memorise them — guaranteed exam question every year!</p>
+      <div class="pill-grid">
+        <div class="pill"><div class="pq">Length</div><div class="pu">Metre</div><div class="ps">m</div></div>
+        <div class="pill"><div class="pq">Mass</div><div class="pu">Kilogram</div><div class="ps">kg</div></div>
+        <div class="pill"><div class="pq">Time</div><div class="pu">Second</div><div class="ps">s</div></div>
+        <div class="pill"><div class="pq">Temperature</div><div class="pu">Kelvin</div><div class="ps">K</div></div>
+        <div class="pill"><div class="pq">Current</div><div class="pu">Ampere</div><div class="ps">A</div></div>
+        <div class="pill"><div class="pq">Luminosity</div><div class="pu">Candela</div><div class="ps">cd</div></div>
+        <div class="pill"><div class="pq">Amount</div><div class="pu">Mole</div><div class="ps">mol</div></div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Unit</th><th>Symbol</th><th>Definition Hint</th></tr></thead>
+        <tbody>
+          <tr><td>Metre</td><td>m</td><td>Distance light travels in 1/299,792,458 second</td></tr>
+          <tr><td>Kilogram</td><td>kg</td><td>Defined via Planck's constant h = 6.626×10⁻³⁴ J·s</td></tr>
+          <tr><td>Second</td><td>s</td><td>9,192,631,770 oscillations of Caesium-133 atom</td></tr>
+          <tr><td>Kelvin</td><td>K</td><td>0 K = Absolute zero = −273.15 °C</td></tr>
+          <tr><td>Ampere</td><td>A</td><td>Flow of 1 coulomb per second</td></tr>
+          <tr><td>Candela</td><td>cd</td><td>Luminous intensity of a light source</td></tr>
+          <tr><td>Mole</td><td>mol</td><td>6.022 × 10²³ particles (Avogadro's number)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <div><strong>Supplementary SI Units:</strong> Radian (rad) for plane angle · Steradian (sr) for solid angle. These are dimensionless but have special names.</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 Exam Guaranteed</span>
+        <span class="tag t-m">🧠 Memorise All 7</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S4: Dimensions ───── -->
+  <div class="sec" id="s4">
+    <div class="sec-card c-orange">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 04 / 11</div>
+          <h2>Dimensions &amp; Dimensional Formulae</h2>
+        </div>
+        <div class="sec-icon-big">🔢</div>
+      </div>
+      <p class="prose">The <em>dimensions</em> of a quantity express which fundamental quantities it is made of and in what power. Symbols used: <strong>[M], [L], [T], [K], [A], [cd], [mol]</strong></p>
+      <div class="formula"><span class="fl">Dimensional Formula Format</span>[Quantity] = Mᵃ Lᵇ Tᶜ Aᵈ Kᵉ ...</div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Physical Quantity</th><th>Relation</th><th>Dimensional Formula</th></tr></thead>
+        <tbody>
+          <tr><td>Area</td><td>l × b</td><td><span class="dim">[M⁰L²T⁰]</span></td></tr>
+          <tr><td>Volume</td><td>l × b × h</td><td><span class="dim">[M⁰L³T⁰]</span></td></tr>
+          <tr><td>Speed / Velocity</td><td>distance / time</td><td><span class="dim">[M⁰L¹T⁻¹]</span></td></tr>
+          <tr><td>Acceleration</td><td>velocity / time</td><td><span class="dim">[M⁰L¹T⁻²]</span></td></tr>
+          <tr><td>Force</td><td>mass × acceleration</td><td><span class="dim">[M¹L¹T⁻²]</span></td></tr>
+          <tr><td>Work / Energy</td><td>force × displacement</td><td><span class="dim">[M¹L²T⁻²]</span></td></tr>
+          <tr><td>Power</td><td>work / time</td><td><span class="dim">[M¹L²T⁻³]</span></td></tr>
+          <tr><td>Pressure</td><td>force / area</td><td><span class="dim">[M¹L⁻¹T⁻²]</span></td></tr>
+          <tr><td>Momentum</td><td>mass × velocity</td><td><span class="dim">[M¹L¹T⁻¹]</span></td></tr>
+          <tr><td>Impulse</td><td>force × time</td><td><span class="dim">[M¹L¹T⁻¹]</span></td></tr>
+          <tr><td>Density</td><td>mass / volume</td><td><span class="dim">[M¹L⁻³T⁰]</span></td></tr>
+          <tr><td>Surface Tension</td><td>force / length</td><td><span class="dim">[M¹L⁰T⁻²]</span></td></tr>
+          <tr><td>Gravitational Constant G</td><td>Fr²/m₁m₂</td><td><span class="dim">[M⁻¹L³T⁻²]</span></td></tr>
+          <tr><td>Planck's Constant h</td><td>Energy / frequency</td><td><span class="dim">[M¹L²T⁻¹]</span></td></tr>
+          <tr><td>Frequency</td><td>1 / time</td><td><span class="dim">[M⁰L⁰T⁻¹]</span></td></tr>
+          <tr><td>Angle / Strain</td><td>dimensionless ratio</td><td><span class="dim">[M⁰L⁰T⁰]</span></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Dimensionless quantities:</strong> Angle, strain, refractive index, relative density, specific gravity, coefficient of friction — all have <span class="dim">[M⁰L⁰T⁰]</span>.</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 5-mark Q</span>
+        <span class="tag t-m">🧠 Memorise Table</span>
+        <span class="tag t-n">🔢 Numericals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S5: Dimensional Analysis ───── -->
+  <div class="sec" id="s5">
+    <div class="sec-card c-green">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 05 / 11</div>
+          <h2>Dimensional Analysis &amp; Applications</h2>
+        </div>
+        <div class="sec-icon-big">🧮</div>
+      </div>
+      <p class="prose"><em>Dimensional analysis</em> is the most powerful problem-solving tool in physics. It lets you check equations, derive formulas, and convert units — all using just dimensions.</p>
+      <div class="callout callout-tip">
+        <span class="callout-icon">📐</span>
+        <div><strong>Principle of Homogeneity:</strong> In any correct physical equation, the dimensions of every term on both sides must be identical. You cannot add metres to seconds!</div>
+      </div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>#</th><th>Application</th><th>How It Works</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Check equation correctness</td><td>Compare dimensions on LHS vs RHS — if equal, equation may be correct</td></tr>
+          <tr><td>2</td><td>Derive formula between quantities</td><td>Assume power law, equate dimensions, solve for unknown exponents</td></tr>
+          <tr><td>3</td><td>Convert units between systems</td><td>Use ratio of unit sizes: n₁u₁ = n₂u₂</td></tr>
+        </tbody>
+      </table></div>
+      <div class="formula"><span class="fl">Unit Conversion Formula</span>n₁u₁ = n₂u₂
+n₂ = n₁ × [M₁/M₂]ᵃ [L₁/L₂]ᵇ [T₁/T₂]ᶜ</div>
+      <div class="quiz">
+        <span class="ql">📝 Classic Exam Problem</span>
+        <div class="qrow">
+          <div class="qq">Q: Check if v = u + at is dimensionally correct.</div>
+          <div class="qa">LHS: [v] = [LT⁻¹]<br>RHS: [u] = [LT⁻¹] · [at] = [LT⁻²][T] = [LT⁻¹]<br>Both sides = [LT⁻¹] ✅ Dimensionally CORRECT</div>
+        </div>
+      </div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Limitations:</strong> Cannot find dimensionless constants (2π, ½) · Fails if >3 unknowns · Cannot handle trig/log/exponential functions · Dimensionally correct ≠ physically correct</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 5-mark + Numerical</span>
+        <span class="tag t-n">🔢 Must Practice</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S6: Significant Figures ───── -->
+  <div class="sec" id="s6">
+    <div class="sec-card c-purple">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 06 / 11</div>
+          <h2>Significant Figures</h2>
+        </div>
+        <div class="sec-icon-big">🔍</div>
+      </div>
+      <p class="prose">Significant figures (sig figs) express the <em>precision of a measurement</em> — how many digits are actually reliable and meaningful.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Rule</th><th>Example</th><th>Sig Figs</th></tr></thead>
+        <tbody>
+          <tr><td>All non-zero digits are significant</td><td>4567</td><td>4</td></tr>
+          <tr><td>Zeros between non-zero digits → significant</td><td>4007</td><td>4</td></tr>
+          <tr><td>Leading zeros → NOT significant</td><td>0.0045</td><td>2</td></tr>
+          <tr><td>Trailing zeros after decimal → significant</td><td>4.500</td><td>4</td></tr>
+          <tr><td>Trailing zeros without decimal → ambiguous</td><td>4500</td><td>2, 3, or 4</td></tr>
+          <tr><td>Scientific notation: all mantissa digits significant</td><td>4.50 × 10³</td><td>3</td></tr>
+        </tbody>
+      </table></div>
+      <div class="formula"><span class="fl">Rules for Operations</span>Addition / Subtraction  →  Result has fewest DECIMAL PLACES
+Multiplication / Division →  Result has fewest SIGNIFICANT FIGURES</div>
+      <div class="mnem">
+        <span class="ml">🧠 Quick Trick</span>
+        <span class="msub">Start counting from the <strong>first non-zero digit</strong> going left to right. Every digit from there is significant — including zeros between digits and trailing zeros after a decimal point.</span>
+      </div>
+      <div class="quiz">
+        <span class="ql">🎯 Quick Practice</span>
+        <div class="qrow">
+          <div class="qq">Sig figs in 0.00230?</div>
+          <div class="qa">→ 3 (digits: 2, 3, 0 — leading zeros don't count; trailing zero after decimal does)</div>
+        </div>
+        <div class="qrow">
+          <div class="qq">Sig figs in 1.0 × 10⁵?</div>
+          <div class="qa">→ 2 (only 1 and 0 in the mantissa count)</div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Important</span>
+        <span class="tag t-e">🎯 3-mark Q</span>
+        <span class="tag t-n">🔢 Numericals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S7: Errors ───── -->
+  <div class="sec" id="s7">
+    <div class="sec-card c-pink">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 07 / 11</div>
+          <h2>Errors in Measurement</h2>
+        </div>
+        <div class="sec-icon-big">📉</div>
+      </div>
+      <p class="prose">No measurement is ever perfect. The difference between the <em>measured value</em> and the <em>true value</em> is called <strong>error</strong>.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Type of Error</th><th>Cause</th><th>Can Be Eliminated?</th></tr></thead>
+        <tbody>
+          <tr><td>Systematic Error</td><td>Faulty instrument, wrong technique, personal bias</td><td>Yes — by correcting the source</td></tr>
+          <tr><td>Random Error</td><td>Unpredictable fluctuations; changes each reading</td><td>Minimised by taking many readings</td></tr>
+          <tr><td>Gross Error / Blunder</td><td>Human mistakes (reading wrong scale, recording error)</td><td>By care and repeated reading</td></tr>
+        </tbody>
+      </table></div>
+      <div class="formula"><span class="fl">Key Error Formulas — Must Know!</span>Mean value:         ā  = (a₁ + a₂ + ... + aₙ) / n
+Absolute Error:     Δaᵢ = |ā − aᵢ|
+Mean Absolute Error: Δā  = (Σ|Δaᵢ|) / n
+Relative Error:     Δā / ā
+Percentage Error:   (Δā / ā) × 100 %</div>
+      <div class="formula"><span class="fl">Error Propagation — Very Important!</span>Addition / Subtraction:    ΔZ = ΔA + ΔB
+Multiplication / Division: ΔZ/Z = ΔA/A + ΔB/B
+Power rule (Z = Aⁿ):      ΔZ/Z = n × (ΔA/A)
+General (Z = AⁿBᵐ/Cᵖ):   ΔZ/Z = n(ΔA/A) + m(ΔB/B) + p(ΔC/C)</div>
+      <div class="callout callout-fun">
+        <span class="callout-icon">🎯</span>
+        <div><strong>Golden Rule:</strong> In error propagation for multiplication/division, <em>always ADD</em> relative errors — never subtract. Errors always accumulate, they never cancel each other!</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 5-mark + Numerical</span>
+        <span class="tag t-n">🔢 Practice All Formulas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S8: Accuracy vs Precision ───── -->
+  <div class="sec" id="s8">
+    <div class="sec-card c-blue">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 08 / 11</div>
+          <h2>Accuracy vs Precision</h2>
+        </div>
+        <div class="sec-icon-big">🎯</div>
+      </div>
+      <p class="prose">These two terms are <em>not the same</em> — confusing them is one of the most common exam mistakes!</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Feature</th><th>Accuracy</th><th>Precision</th></tr></thead>
+        <tbody>
+          <tr><td>Meaning</td><td>How close to the TRUE value</td><td>How close to EACH OTHER (reproducibility)</td></tr>
+          <tr><td>Depends on</td><td>Systematic errors</td><td>Random errors / instrument sensitivity</td></tr>
+          <tr><td>Example</td><td>True = 10.0 kg; Measured = 10.02 kg → Accurate ✅</td><td>Got 9.8, 9.8, 9.8 kg repeatedly → Precise ✅</td></tr>
+          <tr><td>Goal</td><td>Close to true value</td><td>Close to each other</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-fun">
+        <span class="callout-icon">🎳</span>
+        <div><strong>Dart Board Analogy:</strong> Darts clustered together but far from bullseye = <em>Precise, NOT Accurate</em>. Darts near bullseye but scattered = <em>Accurate, NOT Precise</em>. Darts clustered at bullseye = <em>Both Accurate AND Precise</em> — the goal!</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Important</span>
+        <span class="tag t-e">🎯 2-3 mark Q</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S9: Vernier Calliper ───── -->
+  <div class="sec" id="s9">
+    <div class="sec-card c-teal">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 09 / 11</div>
+          <h2>Least Count &amp; Vernier Callipers</h2>
+        </div>
+        <div class="sec-icon-big">🔬</div>
+      </div>
+      <p class="prose"><em>Least Count (LC)</em> is the smallest value an instrument can measure accurately. A smaller LC = higher precision.</p>
+      <div class="formula"><span class="fl">Vernier Calliper — Formulas</span>LC = 1 MSD − 1 VSD
+LC = (Value of 1 MSD) / (Total Vernier divisions)
+Typical LC = 0.1 mm = 0.01 cm
+
+Total Reading = MSR + (VSR × LC)</div>
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <div><strong>Zero Error:</strong> When jaws are closed, if Vernier zero ≠ main scale zero.<br>
+        · <strong>Positive zero error</strong> (Vernier zero RIGHT of zero) → <em>subtract</em> from reading<br>
+        · <strong>Negative zero error</strong> (Vernier zero LEFT of zero) → <em>add</em> to reading<br>
+        · Formula: <strong>Corrected Reading = Observed Reading − Zero Error</strong></div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 Practical + Theory</span>
+        <span class="tag t-n">🔢 Numericals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S10: Screw Gauge ───── -->
+  <div class="sec" id="s10">
+    <div class="sec-card c-green">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 10 / 11</div>
+          <h2>Screw Gauge (Micrometer)</h2>
+        </div>
+        <div class="sec-icon-big">🔩</div>
+      </div>
+      <p class="prose">The screw gauge measures very small lengths (like wire diameter, thickness of a coin) with <em>higher precision than a Vernier calliper</em> — up to <strong>0.01 mm</strong>!</p>
+      <div class="formula"><span class="fl">Screw Gauge — Key Formulas</span>Pitch = Distance moved per full rotation
+      = Distance between consecutive threads
+
+LC = Pitch / Total circular scale divisions
+   = 1 mm / 100 = 0.01 mm (typically)
+
+Total Reading = LSR + (CSR × LC)</div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Instrument</th><th>Least Count</th><th>Typical Range</th></tr></thead>
+        <tbody>
+          <tr><td>Metre Scale</td><td>1 mm</td><td>0 – 100 cm</td></tr>
+          <tr><td>Vernier Calliper</td><td>0.1 mm (0.01 cm)</td><td>0 – ~15 cm</td></tr>
+          <tr><td>Screw Gauge</td><td>0.01 mm (0.001 cm)</td><td>0 – ~2.5 cm</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout callout-tip">
+        <span class="callout-icon">💡</span>
+        <div><strong>Backlash Error:</strong> Due to worn threads, turning the screw may not immediately move the thimble. Always approach your final reading from the same direction to avoid this error.</div>
+      </div>
+      <div class="callout callout-fun">
+        <span class="callout-icon">🤯</span>
+        <div><strong>Mind = Blown:</strong> A screw gauge measures 0.01 mm — that's thinner than a human hair, which is ~70 µm = 0.07 mm!</div>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ Very Important</span>
+        <span class="tag t-e">🎯 Practical + 3-mark Q</span>
+        <span class="tag t-n">🔢 Numericals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── S11: Quick Revision ───── -->
+  <div class="sec" id="s11">
+    <div class="sec-card c-purple">
+      <div class="sec-header">
+        <div class="sec-meta">
+          <div class="sec-eyebrow"><span class="sec-dot"></span>Topic 11 / 11</div>
+          <h2>Quick Revision Blast ⚡</h2>
+        </div>
+        <div class="sec-icon-big">🚀</div>
+      </div>
+      <div class="quiz">
+        <span class="ql">📌 10 Must-Know Facts — Read Before Every Exam</span>
+        <div class="qrow"><div class="qq">1. SI has <strong>7 base + 2 supplementary</strong> units</div></div>
+        <div class="qrow"><div class="qq">2. Force = <span class="dim">[MLT⁻²]</span> · Work/Energy = <span class="dim">[ML²T⁻²]</span> · Power = <span class="dim">[ML²T⁻³]</span></div></div>
+        <div class="qrow"><div class="qq">3. Momentum = Impulse = <span class="dim">[MLT⁻¹]</span></div></div>
+        <div class="qrow"><div class="qq">4. Errors in product/ratio → relative errors always <strong>ADD</strong></div></div>
+        <div class="qrow"><div class="qq">5. % error in Aⁿ = <strong>n × % error in A</strong></div></div>
+        <div class="qrow"><div class="qq">6. Vernier LC = <strong>1 MSD − 1 VSD</strong></div></div>
+        <div class="qrow"><div class="qq">7. Screw Gauge LC = <strong>Pitch / Circular divisions</strong></div></div>
+        <div class="qrow"><div class="qq">8. Sig figs in 6.020 × 10³ = <strong>4</strong></div></div>
+        <div class="qrow"><div class="qq">9. Planck's constant h = <span class="dim">[ML²T⁻¹]</span></div></div>
+        <div class="qrow"><div class="qq">10. Angle is dimensionless = <span class="dim">[M⁰L⁰T⁰]</span></div></div>
+      </div>
+      <div class="mnem">
+        <span class="ml">🧠 Error Formula Tree — Last Night Revision</span>
+        <span class="mbig">Z = A ± B → ΔZ = ΔA + ΔB</span>
+        <span class="msub">
+          Z = A × B or A/B → ΔZ/Z = ΔA/A + ΔB/B<br>
+          Z = Aⁿ → ΔZ/Z = n · (ΔA/A)<br>
+          Z = AⁿBᵐ/Cᵖ → ΔZ/Z = n(ΔA/A) + m(ΔB/B) + p(ΔC/C)
+        </span>
+      </div>
+      <div class="mnem">
+        <span class="ml">🧠 Dimension Shortcut — Powers of T</span>
+        <span class="msub">
+          Velocity → T⁻¹ · Acceleration → T⁻² · Force → T⁻² (with M·L)<br>
+          Power → T⁻³ · Pressure → T⁻² (with M·L⁻¹)<br>
+          <strong>Rule:</strong> Each time you divide by time, T-power decreases by 1!
+        </span>
+      </div>
+      <div class="tags">
+        <span class="tag t-i">⭐ All Exam Types</span>
+        <span class="tag t-e">🎯 Night Before Exam</span>
+        <span class="tag t-m">🧠 Key Facts</span>
+        <span class="tag t-n">🔢 All Formulas</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Class 11 · Physics · Chapter 2</div>
+  <div class="footer-sub">Units &amp; Measurements — Topper Notes · Study smart, not just hard. 🌟</div>
+</footer>
+
+<!-- Back to Top -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<!-- =============================================
+     JAVASCRIPT — Scroll animations, active nav, back-to-top
+============================================= -->
+<script>
+// ── Intersection Observer for section fade-in ──
+const sections = document.querySelectorAll('.sec');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+sections.forEach(s => observer.observe(s));
+
+// ── Active nav link + TOC link on scroll ──
+const navLinks = document.querySelectorAll('.nav-links li a');
+const tocLinks = document.querySelectorAll('.toc-row');
+const secIds   = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11'];
+
+function getActive() {
+  const scrollY = window.scrollY + 100;
+  let active = null;
+  secIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) active = id;
+  });
+  return active;
+}
+
+function updateActive() {
+  const id = getActive();
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+  });
+  tocLinks.forEach(a => {
+    a.classList.toggle('active-toc', a.getAttribute('href') === '#' + id);
+  });
+}
+
+// ── Back to top visibility ──
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('show', window.scrollY > 400);
+  updateActive();
+}, { passive: true });
+
+// ── Smooth click for all anchor links ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── Stagger hero chips entrance ──
+document.querySelectorAll('.chip').forEach((chip, i) => {
+  chip.style.opacity = '0';
+  chip.style.transform = 'translateY(10px)';
+  chip.style.transition = `opacity 0.5s ${0.65 + i * 0.07}s ease, transform 0.5s ${0.65 + i * 0.07}s ease`;
+  setTimeout(() => {
+    chip.style.opacity = '1';
+    chip.style.transform = 'translateY(0)';
+  }, 100);
+});
+</script>
+</body>
+</html>
