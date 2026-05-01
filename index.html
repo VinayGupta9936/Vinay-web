@@ -639,7 +639,27 @@
 <body>
 
 <!-- ────────── POPUP ────────── -->
-
+<div id="popup-overlay">
+  <div class="popup-card">
+    <div class="popup-avatar">V</div>
+    <div class="popup-name">Vinay Gupta</div>
+    <a href="https://instagram.com/gt_vinay5" target="_blank" class="popup-insta">
+      <i class="fab fa-instagram"></i> @gt_vinay5
+    </a>
+    <div class="popup-welcome">🎉 Welcome, Scholar!</div>
+    <p class="popup-text">
+      Yahan aapka swagat hai — Class 11 CBSE ka sabse friendly study hub.<br/>
+      Physics, Chemistry aur Maths ke notes, chapters aur revision material ek hi jagah.<br/>
+      Padho. Samjho. Top karo! 🚀
+    </p>
+    <div class="popup-bar"><div class="popup-bar-fill"></div></div>
+  </div>
+</div>
+  <script>
+  setTimeout(function() {
+    document.getElementById("popup-overlay").style.display = "none";
+  }, 2000);
+  </script>
 <!-- ────────── NAV ────────── -->
 <nav>
   <a href="#home" class="nav-logo">Study11 ⚡</a>
