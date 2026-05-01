@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chemistry – Class 11 CBSE | Study11</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root{--bg:#0a0a0f;--surface:#13131a;--card:#1a1a24;--border:rgba(255,255,255,0.07);--accent:#ff6584;--text:#f0f0f5;--muted:#888899;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+    .nav-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;background:linear-gradient(135deg,#ff6584,#ff9a9e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+    .nav-back{display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;}
+    .nav-back:hover{color:var(--accent);}
+    .hero{padding:140px 40px 80px;background:radial-gradient(ellipse 60% 50% at 30% 30%,rgba(255,101,132,0.18),transparent),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(255,154,158,0.1),transparent);text-align:center;border-bottom:1px solid var(--border);}
+    .hero-icon{font-size:4rem;margin-bottom:16px;}
+    .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;margin-bottom:16px;}
+    .hero h1 span{background:linear-gradient(135deg,#ff6584,#ff9a9e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+    .hero p{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 32px;line-height:1.7;}
+    .hero-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+    .tag{background:rgba(255,101,132,0.12);border:1px solid rgba(255,101,132,0.25);color:var(--accent);font-size:.8rem;font-weight:600;padding:5px 14px;border-radius:50px;}
+    .chapters-section{max-width:1100px;margin:0 auto;padding:80px 40px;}
+    .sec-label{font-size:.8rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    .sec-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:40px;}
+    .chapters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+    .chapter-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px 22px;display:flex;align-items:flex-start;gap:16px;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;position:relative;overflow:hidden;}
+    .chapter-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,#ff6584,#ff9a9e);border-radius:3px 0 0 3px;}
+    .chapter-card:hover{transform:translateY(-4px);border-color:rgba(255,101,132,0.35);box-shadow:0 16px 40px rgba(0,0,0,0.35);}
+    .ch-num{min-width:40px;height:40px;background:rgba(255,101,132,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:var(--accent);font-size:.95rem;}
+    .ch-info h3{font-size:1rem;font-weight:600;margin-bottom:6px;}
+    .ch-info p{color:var(--muted);font-size:.8rem;line-height:1.5;}
+    .ch-badge{margin-top:10px;display:inline-block;background:rgba(67,233,123,0.1);border:1px solid rgba(67,233,123,0.2);color:#43e97b;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:50px;}
+    .upload-section{max-width:1100px;margin:0 auto;padding:0 40px 80px;}
+    .upload-card{background:linear-gradient(135deg,rgba(255,101,132,0.1),rgba(255,154,158,0.05));border:1px dashed rgba(255,101,132,0.35);border-radius:24px;padding:48px;text-align:center;}
+    .upload-card h3{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:12px;}
+    .upload-card p{color:var(--muted);font-size:.95rem;margin-bottom:24px;line-height:1.65;}
+    .upload-card a{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ff6584,#ff9a9e);color:#fff;padding:12px 28px;border-radius:12px;text-decoration:none;font-weight:600;font-size:.95rem;transition:opacity .2s,transform .2s;}
+    .upload-card a:hover{opacity:.9;transform:translateY(-1px);}
+    footer{background:#08080d;border-top:1px solid var(--border);padding:32px 40px;text-align:center;color:var(--muted);font-size:.85rem;}
+    footer a{color:var(--accent);text-decoration:none;}
+    @media(max-width:600px){nav{padding:16px 20px;}.hero{padding:100px 20px 60px;}.chapters-section,.upload-section{padding:60px 20px;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Study11 ⚡</a>
+  <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</nav>
+<div class="hero">
+  <div class="hero-icon">🧪</div>
+  <h1>Class 11 <span>Chemistry</span></h1>
+  <p>Reactions, periodic trends, bonding aur thermodynamics — sab clear notes ke saath!</p>
+  <div class="hero-tags">
+    <span class="tag">CBSE</span><span class="tag">NCERT</span><span class="tag">Free Notes</span><span class="tag">Reactions</span>
+  </div>
+</div>
+<div class="chapters-section">
+  <div class="sec-label">📂 All Chapters</div>
+  <div class="sec-title">Chemistry Chapters</div>
+  <div class="chapters-grid">
+    <div class="chapter-card"><div class="ch-num">01</div><div class="ch-info"><h3>Some Basic Concepts of Chemistry</h3><p>Mole concept, molarity, stoichiometry, laws of chemical combination</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">02</div><div class="ch-info"><h3>Structure of Atom</h3><p>Bohr model, quantum numbers, orbitals, electronic configuration, dual nature</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">03</div><div class="ch-info"><h3>Classification of Elements & Periodicity</h3><p>Periodic table, trends — ionization, electronegativity, atomic radius</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">04</div><div class="ch-info"><h3>Chemical Bonding & Molecular Structure</h3><p>Lewis structures, VSEPR, hybridization, ionic & covalent bonds, MO theory</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">05</div><div class="ch-info"><h3>States of Matter</h3><p>Gas laws, kinetic molecular theory, van der Waals equation, liquids & solids</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">06</div><div class="ch-info"><h3>Thermodynamics</h3><p>System, enthalpy, Hess's law, entropy, Gibbs free energy, spontaneity</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">07</div><div class="ch-info"><h3>Equilibrium</h3><p>Chemical equilibrium, Le Chatelier's principle, ionic equilibrium, pH, buffers</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">08</div><div class="ch-info"><h3>Redox Reactions</h3><p>Oxidation numbers, balancing redox equations, electrochemical cells</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">09</div><div class="ch-info"><h3>Hydrogen</h3><p>Position in periodic table, isotopes, hydrides, water, hydrogen peroxide</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">10</div><div class="ch-info"><h3>The s-Block Elements</h3><p>Alkali & alkaline earth metals, compounds, anomalous behaviour of Li & Be</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">11</div><div class="ch-info"><h3>The p-Block Elements</h3><p>Groups 13 & 14 — boron family, carbon family, allotropes, compounds</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">12</div><div class="ch-info"><h3>Organic Chemistry – Basic Principles</h3><p>IUPAC nomenclature, isomerism, reaction mechanisms, inductive & mesomeric effect</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">13</div><div class="ch-info"><h3>Hydrocarbons</h3><p>Alkanes, alkenes, alkynes, benzene, aromatic hydrocarbons, reactions</p><span class="ch-badge">Notes Available</span></div></div>
+    <div class="chapter-card"><div class="ch-num">14</div><div class="ch-info"><h3>Environmental Chemistry</h3><p>Pollution — atmospheric, water, soil; greenhouse effect, ozone depletion</p><span class="ch-badge">Notes Available</span></div></div>
+  </div>
+</div>
+<div class="upload-section">
+  <div class="upload-card">
+    <h3>📩 Koi Chapter File Chahiye?</h3>
+    <p>Kisi bhi chapter ka PDF ya handwritten notes chahiye to email ya DM karo. Main jaldi share kar dunga! 🔬</p>
+    <a href="mailto:guptavinita.9936@gmail.com"><i class="fas fa-envelope"></i> Email Karo</a>
+  </div>
+</div>
+<footer><p>© 2026 Study11 by Vinay Gupta • Gorakhpur, UP • <a href="index.html">Home</a> • <a href="https://instagram.com/gt_vinay5" target="_blank">@gt_vinay5</a></p></footer>
+</body>
+</html>

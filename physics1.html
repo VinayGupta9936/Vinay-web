@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Physics – Class 11 CBSE | Study11</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg:#0a0a0f; --surface:#13131a; --card:#1a1a24; --border:rgba(255,255,255,0.07);
+      --accent:#6c63ff; --text:#f0f0f5; --muted:#888899;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:18px 40px;
+      display:flex;align-items:center;justify-content:space-between;
+      background:rgba(10,10,15,0.8);backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;
+      background:linear-gradient(135deg,var(--accent),#a78bfa);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+    .nav-back{
+      display:flex;align-items:center;gap:8px;
+      color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;
+      transition:color .2s;
+    }
+    .nav-back:hover{color:var(--accent);}
+
+    .hero{
+      padding:140px 40px 80px;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 30%, rgba(108,99,255,0.2), transparent),
+        radial-gradient(ellipse 40% 40% at 80% 70%, rgba(167,139,250,0.1), transparent);
+      text-align:center;
+      border-bottom:1px solid var(--border);
+    }
+    .hero-icon{font-size:4rem;margin-bottom:16px;}
+    .hero h1{
+      font-family:'Syne',sans-serif;
+      font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;
+      margin-bottom:16px;
+    }
+    .hero h1 span{
+      background:linear-gradient(135deg,var(--accent),#a78bfa);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .hero p{color:var(--muted);font-size:1.05rem;max-width:520px;margin:0 auto 32px;line-height:1.7;}
+    .hero-tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+    .tag{
+      background:rgba(108,99,255,0.12);border:1px solid rgba(108,99,255,0.25);
+      color:var(--accent);font-size:.8rem;font-weight:600;
+      padding:5px 14px;border-radius:50px;
+    }
+
+    .chapters-section{max-width:1100px;margin:0 auto;padding:80px 40px;}
+    .sec-label{font-size:.8rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+    .sec-title{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;margin-bottom:40px;}
+
+    .chapters-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:18px;
+    }
+    .chapter-card{
+      background:var(--card);border:1px solid var(--border);border-radius:18px;
+      padding:24px 22px;
+      display:flex;align-items:flex-start;gap:16px;
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+      cursor:pointer;
+      position:relative;overflow:hidden;
+    }
+    .chapter-card::before{
+      content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+      background:linear-gradient(180deg,var(--accent),#a78bfa);
+      border-radius:3px 0 0 3px;
+    }
+    .chapter-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(108,99,255,0.35);
+      box-shadow:0 16px 40px rgba(0,0,0,0.35);
+    }
+    .ch-num{
+      min-width:40px;height:40px;
+      background:rgba(108,99,255,0.12);
+      border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Syne',sans-serif;font-weight:800;
+      color:var(--accent);font-size:.95rem;
+    }
+    .ch-info h3{font-size:1rem;font-weight:600;margin-bottom:6px;}
+    .ch-info p{color:var(--muted);font-size:.8rem;line-height:1.5;}
+    .ch-badge{
+      margin-top:10px;display:inline-block;
+      background:rgba(67,233,123,0.1);border:1px solid rgba(67,233,123,0.2);
+      color:#43e97b;font-size:.7rem;font-weight:600;
+      padding:3px 10px;border-radius:50px;
+    }
+
+    /* Upload section */
+    .upload-section{
+      max-width:1100px;margin:0 auto;padding:0 40px 80px;
+    }
+    .upload-card{
+      background:linear-gradient(135deg,rgba(108,99,255,0.12),rgba(167,139,250,0.06));
+      border:1px dashed rgba(108,99,255,0.35);
+      border-radius:24px;padding:48px;text-align:center;
+    }
+    .upload-card h3{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:12px;}
+    .upload-card p{color:var(--muted);font-size:.95rem;margin-bottom:24px;line-height:1.65;}
+    .upload-card a{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,var(--accent),#a78bfa);
+      color:#fff;padding:12px 28px;border-radius:12px;
+      text-decoration:none;font-weight:600;font-size:.95rem;
+      transition:opacity .2s,transform .2s;
+    }
+    .upload-card a:hover{opacity:.9;transform:translateY(-1px);}
+
+    footer{
+      background:#08080d;border-top:1px solid var(--border);
+      padding:32px 40px;text-align:center;
+      color:var(--muted);font-size:.85rem;
+    }
+    footer a{color:var(--accent);text-decoration:none;}
+
+    @media(max-width:600px){
+      nav{padding:16px 20px;}
+      .hero{padding:100px 20px 60px;}
+      .chapters-section,.upload-section{padding:60px 20px;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">Study11 ⚡</a>
+  <a href="index.html" class="nav-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">⚛️</div>
+  <h1>Class 11 <span>Physics</span></h1>
+  <p>NCERT-based chapter notes, formulas, and revision files. Har concept clearly explained!</p>
+  <div class="hero-tags">
+    <span class="tag">CBSE</span>
+    <span class="tag">NCERT</span>
+    <span class="tag">Free Notes</span>
+    <span class="tag">Chapter-wise</span>
+  </div>
+</div>
+
+<div class="chapters-section">
+  <div class="sec-label">📂 All Chapters</div>
+  <div class="sec-title">Physics Chapters</div>
+  <div class="chapters-grid">
+
+    <div class="chapter-card">
+      <div class="ch-num">01</div>
+      <div class="ch-info">
+        <h3>Physical World</h3>
+        <p>Science & physics overview, fundamental forces, nature of physical laws</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">02</div>
+      <div class="ch-info">
+        <h3>Units & Measurements</h3>
+        <p>SI units, dimensional analysis, significant figures, errors in measurement</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">03</div>
+      <div class="ch-info">
+        <h3>Motion in a Straight Line</h3>
+        <p>Distance, displacement, velocity, acceleration, kinematic equations, graphs</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">04</div>
+      <div class="ch-info">
+        <h3>Motion in a Plane</h3>
+        <p>Vectors, projectile motion, relative velocity, circular motion</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">05</div>
+      <div class="ch-info">
+        <h3>Laws of Motion</h3>
+        <p>Newton's 3 laws, friction, tension, pulley problems, free body diagrams</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">06</div>
+      <div class="ch-info">
+        <h3>Work, Energy & Power</h3>
+        <p>Work-energy theorem, potential & kinetic energy, conservation, power</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">07</div>
+      <div class="ch-info">
+        <h3>System of Particles & Rotational Motion</h3>
+        <p>Centre of mass, torque, angular momentum, MOI, rotational equilibrium</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">08</div>
+      <div class="ch-info">
+        <h3>Gravitation</h3>
+        <p>Universal law, Kepler's laws, satellite motion, escape velocity, orbital speed</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">09</div>
+      <div class="ch-info">
+        <h3>Mechanical Properties of Solids</h3>
+        <p>Stress, strain, Young's modulus, Hooke's law, elastic properties</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">10</div>
+      <div class="ch-info">
+        <h3>Mechanical Properties of Fluids</h3>
+        <p>Pressure, Pascal's law, Bernoulli's theorem, viscosity, surface tension</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">11</div>
+      <div class="ch-info">
+        <h3>Thermal Properties of Matter</h3>
+        <p>Temperature, thermal expansion, specific heat, latent heat, calorimetry</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">12</div>
+      <div class="ch-info">
+        <h3>Thermodynamics</h3>
+        <p>Laws of thermodynamics, heat engines, Carnot cycle, entropy</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">13</div>
+      <div class="ch-info">
+        <h3>Kinetic Theory</h3>
+        <p>Kinetic theory of gases, RMS speed, degrees of freedom, equipartition</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">14</div>
+      <div class="ch-info">
+        <h3>Oscillations</h3>
+        <p>SHM, spring-mass system, simple pendulum, damped & forced oscillations</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+    <div class="chapter-card">
+      <div class="ch-num">15</div>
+      <div class="ch-info">
+        <h3>Waves</h3>
+        <p>Wave motion, speed of sound, superposition, Doppler effect, resonance</p>
+        <span class="ch-badge">Notes Available</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="upload-section">
+  <div class="upload-card">
+    <h3>📩 Need a Specific Chapter File?</h3>
+    <p>
+      Agar kisi chapter ka PDF ya notes chahiye to directly email karo ya Instagram par DM karo.<br/>
+      Main jaldi se share kar dunga! 🚀
+    </p>
+    <a href="mailto:guptavinita.9936@gmail.com">
+      <i class="fas fa-envelope"></i> Email Karo
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Study11 by Vinay Gupta • Gorakhpur, UP •
+    <a href="index.html">Home</a> •
+    <a href="https://instagram.com/gt_vinay5" target="_blank">@gt_vinay5</a>
+  </p>
+</footer>
+</body>
+</html>
