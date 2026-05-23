@@ -1363,10 +1363,46 @@ materials and updates.
 <h2>📢 Next Question Set</h2>
 
 <p>
-Ready for more practice?
-<a href="ph-1ques.html">Click here to open PH-1 Question Set</a>
+  Ready for more practice?
+  <a class="island-link" href="ph-1ques.html">
+    Click here to open PH-1 Question Set
+  </a>
 </p>
 
+<style>
+.island-link{
+  display:inline-block;
+  margin-top:10px;
+  padding:14px 22px;
+  border-radius:50px;
+  background:#000;
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  transition:0.3s ease;
+  position:relative;
+}
+
+/* Dynamic Island top notch effect */
+.island-link::before{
+  content:'';
+  position:absolute;
+  top:4px;
+  left:50%;
+  transform:translateX(-50%);
+  width:40%;
+  height:5px;
+  background:#222;
+  border-radius:0 0 10px 10px;
+  opacity:0.6;
+}
+
+.island-link:hover{
+  transform:scale(1.08);
+  background:#111;
+}
+</style>
 <hr>
    
 </body>
