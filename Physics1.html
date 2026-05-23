@@ -1370,40 +1370,112 @@ materials and updates.
 </p>
 
 <style>
-.island-link{
-  display:inline-block;
-  margin-top:10px;
-  padding:14px 22px;
-  border-radius:50px;
-  background:#000;
-  color:#fff;
-  text-decoration:none;
-  font-weight:500;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
-  transition:0.3s ease;
-  position:relative;
+body{
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, Arial;
 }
 
-/* Dynamic Island top notch effect */
-.island-link::before{
-  content:'';
-  position:absolute;
-  top:4px;
+/* initial island */
+.island-link{
+  position:fixed;
+  top:20px;
   left:50%;
   transform:translateX(-50%);
-  width:40%;
-  height:5px;
-  background:#222;
-  border-radius:0 0 10px 10px;
-  opacity:0.6;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  width:60px;
+  height:44px;
+  border-radius:50px;
+  overflow:hidden;
+  cursor:pointer;
+  text-decoration:none;
+  color:#fff;
+  font-weight:600;
+
+  background: linear-gradient(270deg, #00c6ff, #00ff85, #00c6ff);
+  background-size:600% 600%;
+  animation:morph 6s ease infinite;
+
+  box-shadow:0 10px 25px rgba(0,255,200,0.25);
+  transition:all 0.5s ease;
+  z-index:9999;
 }
 
-.island-link:hover{
-  transform:scale(1.08);
-  background:#111;
+/* dot */
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 10px white;
+  margin-left:14px;
+}
+
+/* hidden text initially */
+.text{
+  opacity:0;
+  white-space:nowrap;
+  transition:0.3s ease;
+}
+
+/* expand hover */
+.island-link:hover .text{
+  opacity:1;
+}
+
+/* 🔥 FULL SCREEN MODE */
+.island-link.active{
+  top:0;
+  left:0;
+  transform:none;
+
+  width:100%;
+  height:100vh;
+  border-radius:0;
+
+  justify-content:center;
+  flex-direction:column;
+
+  font-size:22px;
+}
+
+/* text visible in full mode */
+.island-link.active .text{
+  opacity:1;
+  font-size:26px;
+  margin-top:10px;
+}
+
+/* animation */
+@keyframes morph{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 </style>
-<hr>
+
+<a class="island-link" href="ph-1ques.html" id="island">
+  <span class="dot"></span>
+  <span class="text">⭐ YOU ARE TOPPER ⭐</span>
+</a>
+
+<script>
+const island = document.getElementById("island");
+
+island.addEventListener("click", function(e){
+  e.preventDefault(); // stop instant redirect
+
+  island.classList.add("active");
+
+  // wait animation then open link
+  setTimeout(()=>{
+    window.location.href = "ph-1ques.html";
+  }, 1200);
+});
+</script>
    
 </body>
 </html>
