@@ -1370,112 +1370,56 @@ materials and updates.
 </p>
 
 <style>
-body{
-  margin:0;
-  font-family:-apple-system, BlinkMacSystemFont, Arial;
-}
-
-/* initial island */
-.island-link{
-  position:fixed;
-  top:20px;
-  left:50%;
-  transform:translateX(-50%);
-
+.glass-link{
   display:flex;
   align-items:center;
+  justify-content:center;
   gap:10px;
 
-  width:60px;
-  height:44px;
-  border-radius:50px;
-  overflow:hidden;
-  cursor:pointer;
-  text-decoration:none;
-  color:#fff;
-  font-weight:600;
-
-  background: linear-gradient(270deg, #00c6ff, #00ff85, #00c6ff);
-  background-size:600% 600%;
-  animation:morph 6s ease infinite;
-
-  box-shadow:0 10px 25px rgba(0,255,200,0.25);
-  transition:all 0.5s ease;
-  z-index:9999;
-}
-
-/* dot */
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:white;
-  box-shadow:0 0 10px white;
-  margin-left:14px;
-}
-
-/* hidden text initially */
-.text{
-  opacity:0;
-  white-space:nowrap;
-  transition:0.3s ease;
-}
-
-/* expand hover */
-.island-link:hover .text{
-  opacity:1;
-}
-
-/* 🔥 FULL SCREEN MODE */
-.island-link.active{
-  top:0;
-  left:0;
-  transform:none;
-
   width:100%;
-  height:100vh;
-  border-radius:0;
+  max-width:340px;
+  margin:40px auto 20px auto;
 
-  justify-content:center;
-  flex-direction:column;
+  padding:14px 18px;
+  border-radius:16px;
 
-  font-size:22px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:15px;
+
+  /* 🌫️ white glass */
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+
+  transition:0.25s ease;
+
+  /* 💜 purple link color */
+  color:#b388ff;
 }
 
-/* text visible in full mode */
-.island-link.active .text{
-  opacity:1;
-  font-size:26px;
-  margin-top:10px;
+.glass-link:hover{
+  transform:scale(1.03);
+  background: rgba(255,255,255,0.16);
+  color:#d1b3ff;
 }
 
-/* animation */
-@keyframes morph{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+.glass-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#b388ff;
+  box-shadow:0 0 10px #b388ff;
 }
 </style>
 
-<a class="island-link" href="ph-1ques.html" id="island">
-  <span class="dot"></span>
-  <span class="text">⭐ YOU ARE TOPPER ⭐</span>
+<!-- 👇 FOOTER LINK -->
+<a class="glass-link" href="ph-1ques.html">
+  <span class="glass-dot"></span>
+  Physics Chapter 1 • Sample Question Paper 1
 </a>
-
-<script>
-const island = document.getElementById("island");
-
-island.addEventListener("click", function(e){
-  e.preventDefault(); // stop instant redirect
-
-  island.classList.add("active");
-
-  // wait animation then open link
-  setTimeout(()=>{
-    window.location.href = "ph-1ques.html";
-  }, 1200);
-});
-</script>
-   
 </body>
 </html>
