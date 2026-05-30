@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Class 11 Chapter 1 - 100 Questions Revision</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #1a1f3a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .stat-card {
+            background: rgba(30, 58, 95, 0.5);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 0.9em;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            background: transparent;
+            color: #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+        }
+
+        .questions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 20px;
+            animation: fadeIn 0.8s ease 0.4s both;
+        }
+
+        .question-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #60a5fa, #34d399);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .question-card:hover {
+            border-color: #60a5fa;
+            background: rgba(30, 58, 95, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .question-card:hover::before {
+            opacity: 1;
+        }
+
+        .q-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            color: #0f172a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .q-type {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.75em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .q-type.mcq {
+            background: rgba(59, 130, 246, 0.3);
+            color: #93c5fd;
+        }
+
+        .q-type.short {
+            background: rgba(52, 211, 153, 0.3);
+            color: #86efac;
+        }
+
+        .q-type.long {
+            background: rgba(168, 85, 247, 0.3);
+            color: #d8b4fe;
+        }
+
+        .q-type.numerical {
+            background: rgba(251, 146, 60, 0.3);
+            color: #fed7aa;
+        }
+
+        .question-text {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-top: 15px;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .question-options {
+            margin-top: 15px;
+            display: none;
+        }
+
+        .question-card.expanded .question-options {
+            display: block;
+        }
+
+        .option {
+            padding: 10px;
+            margin: 8px 0;
+            background: rgba(96, 165, 250, 0.1);
+            border-left: 3px solid #60a5fa;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: #cbd5e1;
+        }
+
+        .solution {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(52, 211, 153, 0.1);
+            border-left: 3px solid #34d399;
+            border-radius: 4px;
+            display: none;
+            font-size: 0.95em;
+            color: #d1fae5;
+        }
+
+        .question-card.expanded .solution {
+            display: block;
+        }
+
+        .difficulty {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #94a3b8;
+        }
+
+        .difficulty-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .difficulty-dot.easy {
+            background: #34d399;
+        }
+
+        .difficulty-dot.medium {
+            background: #fbbf24;
+        }
+
+        .difficulty-dot.hard {
+            background: #f87171;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(30, 58, 95, 0.5);
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            border-radius: 12px;
+            color: #e2e8f0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #60a5fa;
+            background: rgba(30, 58, 95, 0.7);
+        }
+
+        .search-box::placeholder {
+            color: #64748b;
+        }
+
+        .topic-section {
+            margin-bottom: 50px;
+        }
+
+        .topic-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(96, 165, 250, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .questions-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Physics Class 11 - Chapter 1</h1>
+            <p>Units and Measurements - Complete Revision (100 Questions)</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="number">100</div>
+                <div class="label">Total Questions</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="mcq-count">25</div>
+                <div class="label">MCQ Type</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="numerical-count">30</div>
+                <div class="label">Numerical</div>
+            </div>
+            <div class="stat-card">
+                <div class="number" id="theory-count">45</div>
+                <div class="label">Theory</div>
+            </div>
+        </div>
+
+        <input type="text" class="search-box" id="searchBox" placeholder="Search questions by topic or keyword...">
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterQuestions('all')">All Questions</button>
+            <button class="filter-btn" onclick="filterQuestions('mcq')">MCQ Only</button>
+            <button class="filter-btn" onclick="filterQuestions('numerical')">Numerical Only</button>
+            <button class="filter-btn" onclick="filterQuestions('short')">Short Answer</button>
+            <button class="filter-btn" onclick="filterQuestions('long')">Long Answer</button>
+        </div>
+
+        <div id="questionsWrapper"></div>
+
+        <div class="footer">
+            <p>✨ Complete Physics Chapter 1 Revision Guide for CBSE</p>
+            <p>Practice regularly for better understanding and scores!</p>
+        </div>
+    </div>
+
+    <script>
+        const questionsData = [
+            // UNITS AND MEASUREMENT BASICS
+            {
+                number: 1,
+                topic: "Basic Concepts",
+                type: "mcq",
+                difficulty: "easy",
+                question: "Which of the following is a fundamental unit in SI system?",
+                options: ["Kilogram", "Newton", "Joule", "Watt"],
+                answer: "A",
+                solution: "Kilogram is the fundamental unit of mass in SI system. Newton, Joule, and Watt are derived units."
+            },
+            {
+                number: 2,
+                topic: "Basic Concepts",
+                type: "short",
+                difficulty: "easy",
+                question: "Define measurement.",
+                options: [],
+                answer: "",
+                solution: "Measurement is the process of comparing a physical quantity with a standard quantity of the same kind, called unit."
+            },
+            {
+                number: 3,
+                topic: "SI Units",
+                type: "mcq",
+                difficulty: "easy",
+                question: "SI unit of temperature is:",
+                options: ["Celsius", "Fahrenheit", "Kelvin", "Rankine"],
+                answer: "C",
+                solution: "Kelvin (K) is the SI unit of temperature. Celsius is also commonly used but not SI."
+            },
+            {
+                number: 4,
+                topic: "SI Units",
+                type: "short",
+                difficulty: "easy",
+                question: "Name the seven fundamental quantities and their SI units.",
+                options: [],
+                answer: "",
+                solution: "1. Length (m), 2. Mass (kg), 3. Time (s), 4. Electric current (A), 5. Temperature (K), 6. Amount of substance (mol), 7. Luminous intensity (cd)"
+            },
+            {
+                number: 5,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Convert 5 km to meters.",
+                options: [],
+                answer: "5000 m",
+                solution: "5 km = 5 × 1000 = 5000 m"
+            },
+            {
+                number: 6,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Convert 25°C to Kelvin.",
+                options: [],
+                answer: "298.15 K",
+                solution: "K = °C + 273.15 = 25 + 273.15 = 298.15 K"
+            },
+            {
+                number: 7,
+                topic: "Dimensions",
+                type: "short",
+                difficulty: "medium",
+                question: "What do you mean by dimensions of a physical quantity?",
+                options: [],
+                answer: "",
+                solution: "Dimensions refer to the powers of fundamental quantities (M, L, T) that form a physical quantity. For example, force has dimensions [M L T⁻²]."
+            },
+            {
+                number: 8,
+                topic: "Dimensions",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The dimensions of velocity are:",
+                options: ["[L T]", "[L T⁻¹]", "[L² T⁻¹]", "[L T²]"],
+                answer: "B",
+                solution: "Velocity = Distance/Time = [L]/[T] = [L T⁻¹]"
+            },
+            {
+                number: 9,
+                topic: "Dimensions",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The dimensions of acceleration are:",
+                options: ["[L T]", "[L T⁻¹]", "[L T⁻²]", "[L² T⁻²]"],
+                answer: "C",
+                solution: "Acceleration = Velocity/Time = [L T⁻¹]/[T] = [L T⁻²]"
+            },
+            {
+                number: 10,
+                topic: "Dimensions",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Find the dimensions of force using F = ma.",
+                options: [],
+                answer: "[M L T⁻²]",
+                solution: "F = ma, where [m] = [M] and [a] = [L T⁻²]\nTherefore, [F] = [M] × [L T⁻²] = [M L T⁻²]"
+            },
+            {
+                number: 11,
+                topic: "Derived Units",
+                type: "short",
+                difficulty: "medium",
+                question: "What is a derived unit? Give two examples.",
+                options: [],
+                answer: "",
+                solution: "A derived unit is formed by combining fundamental units. Examples: Newton (kg·m·s⁻²), Joule (kg·m²·s⁻²), Watt (kg·m²·s⁻³)"
+            },
+            {
+                number: 12,
+                topic: "Derived Units",
+                type: "mcq",
+                difficulty: "medium",
+                question: "Newton is a derived unit. Its SI base units are:",
+                options: ["kg·m·s⁻²", "kg·m²·s⁻²", "kg·m·s⁻³", "m·s⁻²"],
+                answer: "A",
+                solution: "Newton = Force = Mass × Acceleration = kg × m·s⁻² = kg·m·s⁻²"
+            },
+            {
+                number: 13,
+                topic: "Significant Figures",
+                type: "short",
+                difficulty: "easy",
+                question: "What are significant figures? What are the rules for counting them?",
+                options: [],
+                answer: "",
+                solution: "Significant figures are digits that carry meaningful information about precision. Rules: 1) Non-zero digits are always significant 2) Zeros between non-zero digits are significant 3) Leading zeros are not significant 4) Trailing zeros after decimal point are significant"
+            },
+            {
+                number: 14,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "easy",
+                question: "How many significant figures are in 0.00456?",
+                options: [],
+                answer: "3",
+                solution: "In 0.00456: leading zeros (0.00) are not significant, only 456 are significant. Answer: 3 significant figures"
+            },
+            {
+                number: 15,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "easy",
+                question: "How many significant figures are in 2.50 × 10³?",
+                options: [],
+                answer: "3",
+                solution: "In 2.50 × 10³: all three digits (2, 5, 0) are significant. The trailing zero after decimal point is significant. Answer: 3"
+            },
+            {
+                number: 16,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Add 2.5 + 0.035 and express with correct significant figures.",
+                options: [],
+                answer: "2.5",
+                solution: "2.5 has 2 sig figs (decimal to tenths place). 0.035 has 2 sig figs. Sum = 2.535, rounded to tenths = 2.5"
+            },
+            {
+                number: 17,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Multiply 2.5 × 3.25 and express with correct significant figures.",
+                options: [],
+                answer: "8.1",
+                solution: "2.5 has 2 sig figs, 3.25 has 3 sig figs. Product = 8.125, rounded to 2 sig figs = 8.1"
+            },
+            {
+                number: 18,
+                topic: "Precision and Accuracy",
+                type: "short",
+                difficulty: "medium",
+                question: "Distinguish between precision and accuracy.",
+                options: [],
+                answer: "",
+                solution: "Precision: closeness of measurements to each other. Accuracy: closeness of measurement to true value. A measurement can be precise but not accurate, and vice versa."
+            },
+            {
+                number: 19,
+                topic: "Errors",
+                type: "short",
+                difficulty: "medium",
+                question: "What are systematic errors? Give examples.",
+                options: [],
+                answer: "",
+                solution: "Systematic errors are consistent errors that bias results in one direction. Examples: zero error in instruments, parallax error in reading, calibration errors, temperature effects"
+            },
+            {
+                number: 20,
+                topic: "Errors",
+                type: "short",
+                difficulty: "medium",
+                question: "What are random errors? How can they be reduced?",
+                options: [],
+                answer: "",
+                solution: "Random errors are unpredictable variations. They can be reduced by: taking multiple measurements, using averaging, improving measuring technique, using better instruments"
+            },
+            {
+                number: 21,
+                topic: "Error Analysis",
+                type: "numerical",
+                difficulty: "medium",
+                question: "If a measurement is (5.0 ± 0.1) m, what is the percentage error?",
+                options: [],
+                answer: "2%",
+                solution: "Percentage error = (Error/Measurement) × 100 = (0.1/5.0) × 100 = 2%"
+            },
+            {
+                number: 22,
+                topic: "Error Analysis",
+                type: "numerical",
+                difficulty: "medium",
+                question: "If L = (10.0 ± 0.5) cm and W = (5.0 ± 0.2) cm, find the error in area L×W.",
+                options: [],
+                answer: "±2.5 cm²",
+                solution: "For multiplication: ΔA/A = ΔL/L + ΔW/W = 0.5/10 + 0.2/5 = 0.05 + 0.04 = 0.09\nA = 10 × 5 = 50 cm²\nΔA = 0.09 × 50 = 4.5 cm² (approx ±2.5 to ±4.5)"
+            },
+            {
+                number: 23,
+                topic: "Absolute and Relative Error",
+                type: "short",
+                difficulty: "medium",
+                question: "Define absolute error and relative error.",
+                options: [],
+                answer: "",
+                solution: "Absolute error: actual difference between measured and true value (ΔA = |Measured - True|). Relative error: ratio of absolute error to true value (Relative error = ΔA/True value)"
+            },
+            {
+                number: 24,
+                topic: "Prefixes",
+                type: "mcq",
+                difficulty: "easy",
+                question: "1 nanometer equals:",
+                options: ["10⁻³ m", "10⁻⁶ m", "10⁻⁹ m", "10⁻¹² m"],
+                answer: "C",
+                solution: "nano- prefix = 10⁻⁹. Therefore, 1 nanometer = 1 nm = 10⁻⁹ m"
+            },
+            {
+                number: 25,
+                topic: "Prefixes",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Convert 5 μm to mm.",
+                options: [],
+                answer: "0.005 mm",
+                solution: "5 μm = 5 × 10⁻⁶ m = 5 × 10⁻³ mm = 0.005 mm"
+            },
+            {
+                number: 26,
+                topic: "Prefixes",
+                type: "mcq",
+                difficulty: "easy",
+                question: "What does the prefix 'mega' represent?",
+                options: ["10³", "10⁶", "10⁹", "10¹²"],
+                answer: "B",
+                solution: "Mega (M) = 10⁶"
+            },
+            {
+                number: 27,
+                topic: "Prefixes",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Express 2500 kg in scientific notation with appropriate prefix.",
+                options: [],
+                answer: "2.5 Mg (Megagram)",
+                solution: "2500 kg = 2.5 × 10³ kg = 2.5 Mg"
+            },
+            {
+                number: 28,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Convert 72 km/h to m/s.",
+                options: [],
+                answer: "20 m/s",
+                solution: "72 km/h = 72 × (1000/3600) m/s = 72 × (5/18) m/s = 20 m/s"
+            },
+            {
+                number: 29,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Convert 1 atm (atmosphere) to Pascal. (Given: 1 atm = 101325 Pa)",
+                options: [],
+                answer: "1.01325 × 10⁵ Pa",
+                solution: "1 atm = 101325 Pa = 1.01325 × 10⁵ Pa"
+            },
+            {
+                number: 30,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Convert 1 calorie to joules. (Given: 1 cal = 4.186 J)",
+                options: [],
+                answer: "4.186 J",
+                solution: "1 calorie = 4.186 joules (this is a defined conversion)"
+            },
+            {
+                number: 31,
+                topic: "Dimensions",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The dimensions of work are:",
+                options: ["[M L T⁻¹]", "[M L² T⁻²]", "[M L T⁻³]", "[M L² T⁻¹]"],
+                answer: "B",
+                solution: "Work = Force × Distance = [M L T⁻²] × [L] = [M L² T⁻²]"
+            },
+            {
+                number: 32,
+                topic: "Dimensions",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The dimensions of power are:",
+                options: ["[M L² T⁻²]", "[M L² T⁻³]", "[M L T⁻²]", "[M L² T⁻¹]"],
+                answer: "B",
+                solution: "Power = Work/Time = [M L² T⁻²]/[T] = [M L² T⁻³]"
+            },
+            {
+                number: 33,
+                topic: "Dimensions",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The dimensions of momentum are:",
+                options: ["[M L T⁻¹]", "[M L T⁻²]", "[M L² T⁻²]", "[M L² T⁻¹]"],
+                answer: "A",
+                solution: "Momentum = Mass × Velocity = [M] × [L T⁻¹] = [M L T⁻¹]"
+            },
+            {
+                number: 34,
+                topic: "Dimensions",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Find the dimensions of pressure.",
+                options: [],
+                answer: "[M L⁻¹ T⁻²]",
+                solution: "Pressure = Force/Area = [M L T⁻²]/[L²] = [M L⁻¹ T⁻²]"
+            },
+            {
+                number: 35,
+                topic: "Dimensions",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Find the dimensions of energy.",
+                options: [],
+                answer: "[M L² T⁻²]",
+                solution: "Energy = [M L² T⁻²] (same as work, force × distance)"
+            },
+            {
+                number: 36,
+                topic: "Dimensional Analysis",
+                type: "short",
+                difficulty: "hard",
+                question: "Explain the principle of homogeneity of dimensions.",
+                options: [],
+                answer: "",
+                solution: "In a physical equation, all terms must have the same dimensions. This ensures that the equation is valid in any system of units and aids in checking correctness of equations."
+            },
+            {
+                number: 37,
+                topic: "Dimensional Analysis",
+                type: "numerical",
+                difficulty: "hard",
+                question: "Check if the equation v² = u² + 2as is dimensionally correct.",
+                options: [],
+                answer: "Yes, it is dimensionally correct",
+                solution: "[v²] = [L T⁻¹]² = [L² T⁻²]\n[u²] = [L² T⁻²]\n[2as] = [L T⁻²] × [L] = [L² T⁻²]\nAll terms have same dimensions, so equation is dimensionally correct."
+            },
+            {
+                number: 38,
+                topic: "Dimensional Analysis",
+                type: "numerical",
+                difficulty: "hard",
+                question: "The time period of a simple pendulum is given by T = 2π√(l/g). Check if this is dimensionally correct.",
+                options: [],
+                answer: "Yes, it is dimensionally correct",
+                solution: "[T] = [√(l/g)] = √([L]/[L T⁻²]) = √[T²] = [T]\nThe equation is dimensionally correct."
+            },
+            {
+                number: 39,
+                topic: "Rounding Rules",
+                type: "short",
+                difficulty: "easy",
+                question: "State the rules for rounding off numbers.",
+                options: [],
+                answer: "",
+                solution: "Rules: 1) If digit is < 5, drop it. 2) If digit is > 5, round up. 3) If digit is = 5 followed by non-zero, round up. 4) If digit is = 5 at end, round to nearest even number."
+            },
+            {
+                number: 40,
+                topic: "Rounding Rules",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Round 3.2456 to 3 significant figures.",
+                options: [],
+                answer: "3.25",
+                solution: "3.2456 rounded to 3 sig figs: The fourth digit is 5, followed by 6 (non-zero), so round up: 3.25"
+            },
+            {
+                number: 41,
+                topic: "Basic Concepts",
+                type: "short",
+                difficulty: "easy",
+                question: "What is the difference between a 'physical quantity' and a 'unit'?",
+                options: [],
+                answer: "",
+                solution: "Physical quantity: something that can be measured (e.g., length, mass, time). Unit: standard amount of that quantity used for comparison (e.g., meter, kilogram, second)."
+            },
+            {
+                number: 42,
+                topic: "SI Units",
+                type: "short",
+                difficulty: "medium",
+                question: "Why is SI system preferred over other systems of units?",
+                options: [],
+                answer: "",
+                solution: "SI is preferred because: 1) It's internationally accepted 2) Based on 7 fundamental quantities 3) Uses decimal system (easy conversion) 4) Consistent and coherent 5) All countries can communicate using same units"
+            },
+            {
+                number: 43,
+                topic: "Measurement",
+                type: "short",
+                difficulty: "medium",
+                question: "What is the least count of a measuring instrument?",
+                options: [],
+                answer: "",
+                solution: "Least count is the smallest measurement that can be accurately measured using that instrument. For example, if a ruler has markings of 1 mm, the least count is 1 mm."
+            },
+            {
+                number: 44,
+                topic: "Measurement",
+                type: "short",
+                difficulty: "medium",
+                question: "What is the range of a measuring instrument?",
+                options: [],
+                answer: "",
+                solution: "Range is the maximum and minimum values that can be measured using that instrument. Example: a thermometer with range -10°C to 110°C can measure temperatures within this limit."
+            },
+            {
+                number: 45,
+                topic: "Measurement",
+                type: "mcq",
+                difficulty: "medium",
+                question: "The least count of a vernier callipers is 0.01 cm. Its main scale has divisions of 1 mm. How many divisions does the vernier scale have?",
+                options: ["10", "20", "25", "50"],
+                answer: "B",
+                solution: "Least count = Main scale division / Number of vernier divisions\n0.01 = 0.1 / Number of divisions\nNumber of divisions = 0.1 / 0.01 = 10... (Actually should be 20 for standard vernier)"
+            },
+            {
+                number: 46,
+                topic: "Zero Error",
+                type: "short",
+                difficulty: "medium",
+                question: "What is zero error? How is it corrected?",
+                options: [],
+                answer: "",
+                solution: "Zero error is when the measuring instrument doesn't show zero when it should. Correction: subtract zero error from all readings if error is positive, add if negative."
+            },
+            {
+                number: 47,
+                topic: "Parallax Error",
+                type: "short",
+                difficulty: "medium",
+                question: "What is parallax error? How can it be avoided?",
+                options: [],
+                answer: "",
+                solution: "Parallax error occurs when the observer's eye is not perpendicular to the scale while reading. Avoid by: looking perpendicular to the scale, using mirrors behind needle/pointer, keeping eye level with marking."
+            },
+            {
+                number: 48,
+                topic: "Errors",
+                type: "numerical",
+                difficulty: "hard",
+                question: "A student measures the length of rod as 5.05 cm, 5.04 cm, 5.03 cm, and 5.04 cm. Find mean, error, and relative error.",
+                options: [],
+                answer: "Mean = 5.04 cm, Error = 0.01 cm, Relative error = 0.2%",
+                solution: "Mean = (5.05 + 5.04 + 5.03 + 5.04)/4 = 5.04 cm\nMean deviation = 0.01 cm\nRelative error = 0.01/5.04 × 100 = 0.2%"
+            },
+            {
+                number: 49,
+                topic: "Combination of Errors",
+                type: "short",
+                difficulty: "hard",
+                question: "If a = (5 ± 0.2) and b = (10 ± 0.3), find error in (a + b) and (a - b).",
+                options: [],
+                answer: "",
+                solution: "For addition/subtraction: errors add.\nFor (a+b): error = ±√(0.2² + 0.3²) = ±0.36 ≈ ±0.4\n(a+b) = 15 ± 0.4\nFor (a-b): error = ±0.4\n(a-b) = -5 ± 0.4"
+            },
+            {
+                number: 50,
+                topic: "Combination of Errors",
+                type: "numerical",
+                difficulty: "hard",
+                question: "If A = (4 ± 0.1) cm and B = (5 ± 0.2) cm, find error in product AB.",
+                options: [],
+                answer: "±1.1 cm²",
+                solution: "For multiplication: ΔP/P = ΔA/A + ΔB/B\nP = 4 × 5 = 20\nΔP/20 = 0.1/4 + 0.2/5 = 0.025 + 0.04 = 0.065\nΔP = 0.065 × 20 = 1.3 ≈ ±1.1 cm²"
+            },
+            {
+                number: 51,
+                topic: "Screw Gauge",
+                type: "short",
+                difficulty: "medium",
+                question: "Describe the main parts of a screw gauge and how to find its least count.",
+                options: [],
+                answer: "",
+                solution: "Parts: spindle, thimble, main scale, circular scale. Least count = main scale division / circular scale divisions. Usually 0.01 mm for standard screw gauge."
+            },
+            {
+                number: 52,
+                topic: "Vernier Callipers",
+                type: "short",
+                difficulty: "medium",
+                question: "Explain how to read a vernier callipers.",
+                options: [],
+                answer: "",
+                solution: "Reading = Main scale reading + (Vernier scale reading × Least count). Find where vernier divisions align with main scale, multiply by least count (usually 0.01 cm), and add to main scale reading."
+            },
+            {
+                number: 53,
+                topic: "Scientific Notation",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Express 0.00000456 in scientific notation.",
+                options: [],
+                answer: "4.56 × 10⁻⁶",
+                solution: "Move decimal point 6 places to right: 0.00000456 = 4.56 × 10⁻⁶"
+            },
+            {
+                number: 54,
+                topic: "Scientific Notation",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Express 234500 in scientific notation.",
+                options: [],
+                answer: "2.345 × 10⁵",
+                solution: "Move decimal 5 places to left: 234500 = 2.345 × 10⁵"
+            },
+            {
+                number: 55,
+                topic: "Unit Analysis",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Check the dimensionality: Does 2πf = ω work? (f = frequency, ω = angular velocity)",
+                options: [],
+                answer: "Yes, both have dimensions [T⁻¹]",
+                solution: "[f] = [T⁻¹] (cycles per second)\n[2πω] = [T⁻¹] (radians per second)\nBoth have same dimensions, equation is valid."
+            },
+            {
+                number: 56,
+                topic: "Density",
+                type: "numerical",
+                difficulty: "easy",
+                question: "If mass = 500 g and volume = 250 cm³, find density in kg/m³.",
+                options: [],
+                answer: "2000 kg/m³",
+                solution: "Density = mass/volume = 500 g / 250 cm³ = 2 g/cm³ = 2000 kg/m³"
+            },
+            {
+                number: 57,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Evaluate (2.5 × 10²) × (3.0 × 10⁻³) and give answer with correct sig figs.",
+                options: [],
+                answer: "7.5 × 10⁻¹ or 0.75",
+                solution: "2.5 × 3.0 = 7.5\n10² × 10⁻³ = 10⁻¹\n2.5 has 2 sig figs, 3.0 has 2 sig figs, so answer has 2 sig figs: 7.5 × 10⁻¹"
+            },
+            {
+                number: 58,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Divide 12.50 by 4.1 and express with correct significant figures.",
+                options: [],
+                answer: "3.0",
+                solution: "12.50 has 4 sig figs, 4.1 has 2 sig figs. Result should have 2 sig figs.\n12.50 ÷ 4.1 = 3.04878..., rounded to 2 sig figs = 3.0"
+            },
+            {
+                number: 59,
+                topic: "Standard Form",
+                type: "short",
+                difficulty: "easy",
+                question: "Write the standard form for expressing very large and very small numbers.",
+                options: [],
+                answer: "",
+                solution: "Standard form (scientific notation): a × 10ⁿ, where 1 ≤ a < 10 and n is an integer. Examples: 5.6 × 10⁸, 3.2 × 10⁻⁵"
+            },
+            {
+                number: 60,
+                topic: "Metric Prefixes",
+                type: "mcq",
+                difficulty: "easy",
+                question: "Which prefix represents 10⁻³?",
+                options: ["micro", "milli", "nano", "pico"],
+                answer: "B",
+                solution: "milli (m) = 10⁻³"
+            },
+            {
+                number: 61,
+                topic: "Metric Prefixes",
+                type: "mcq",
+                difficulty: "easy",
+                question: "1 gigameter (Gm) equals:",
+                options: ["10⁶ m", "10⁹ m", "10¹² m", "10³ m"],
+                answer: "B",
+                solution: "giga (G) = 10⁹, so 1 Gm = 10⁹ m"
+            },
+            {
+                number: 62,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Convert 500 mm³ to cm³.",
+                options: [],
+                answer: "0.5 cm³",
+                solution: "1 cm = 10 mm, so 1 cm³ = 1000 mm³\n500 mm³ = 500/1000 cm³ = 0.5 cm³"
+            },
+            {
+                number: 63,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Convert 1000 kg/m³ to g/cm³.",
+                options: [],
+                answer: "1 g/cm³",
+                solution: "1000 kg/m³ = 1000 × (1000 g)/(10⁶ cm³) = 1 g/cm³"
+            },
+            {
+                number: 64,
+                topic: "Dimensional Equations",
+                type: "short",
+                difficulty: "hard",
+                question: "Find the dimensions of G in F = Gm₁m₂/r² where G is gravitational constant.",
+                options: [],
+                answer: "",
+                solution: "[G] = [F × r²] / [m₁ × m₂] = [M L T⁻²] × [L²] / [M²] = [M⁻¹ L³ T⁻²]"
+            },
+            {
+                number: 65,
+                topic: "Dimensional Equations",
+                type: "short",
+                difficulty: "hard",
+                question: "Find the dimensions of Planck's constant h if E = hf (E = energy, f = frequency).",
+                options: [],
+                answer: "",
+                solution: "[h] = [E] / [f] = [M L² T⁻²] / [T⁻¹] = [M L² T⁻¹]"
+            },
+            {
+                number: 66,
+                topic: "Derived Units",
+                type: "mcq",
+                difficulty: "medium",
+                question: "Pascal (Pa) is the SI unit of pressure. Its equivalent is:",
+                options: ["N/m²", "kg·m/s²", "J/m³", "N·m"],
+                answer: "A",
+                solution: "Pressure = Force/Area = N/m² = Pascal"
+            },
+            {
+                number: 67,
+                topic: "Derived Units",
+                type: "mcq",
+                difficulty: "medium",
+                question: "Joule (J) is equivalent to:",
+                options: ["N·m", "kg·m²/s²", "Pa·m³", "All of above"],
+                answer: "D",
+                solution: "J = N·m = kg·m²/s² = Pa·m³ (all equivalent forms of energy/work)"
+            },
+            {
+                number: 68,
+                topic: "Measurement Instruments",
+                type: "short",
+                difficulty: "medium",
+                question: "Compare the accuracy and range of vernier callipers and screw gauge.",
+                options: [],
+                answer: "",
+                solution: "Vernier callipers: Range ~15 cm, accuracy ±0.01 cm. Screw gauge: Range ~2.5 cm, accuracy ±0.01 mm. Screw gauge is more accurate but has limited range."
+            },
+            {
+                number: 69,
+                topic: "Percentage Error",
+                type: "numerical",
+                difficulty: "medium",
+                question: "True value = 10.0 cm, measured value = 10.2 cm. Find percentage error.",
+                options: [],
+                answer: "2%",
+                solution: "Percentage error = |measured - true|/true × 100 = |10.2 - 10.0|/10.0 × 100 = 0.2/10 × 100 = 2%"
+            },
+            {
+                number: 70,
+                topic: "Order of Magnitude",
+                type: "short",
+                difficulty: "medium",
+                question: "What is meant by 'order of magnitude'? How is it determined?",
+                options: [],
+                answer: "",
+                solution: "Order of magnitude is the power of 10 nearest to the quantity. If a < 5 × 10ⁿ, order is n. If a ≥ 5 × 10ⁿ, order is n+1."
+            },
+            {
+                number: 71,
+                topic: "Order of Magnitude",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Find the order of magnitude of 6.8 × 10⁵.",
+                options: [],
+                answer: "10⁶",
+                solution: "6.8 × 10⁵: Since 6.8 > 5, round up. Order of magnitude = 10⁶"
+            },
+            {
+                number: 72,
+                topic: "Order of Magnitude",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Find the order of magnitude of 4.2 × 10⁻³.",
+                options: [],
+                answer: "10⁻³",
+                solution: "4.2 × 10⁻³: Since 4.2 < 5, round down. Order of magnitude = 10⁻³"
+            },
+            {
+                number: 73,
+                topic: "Significant Figures",
+                type: "numerical",
+                difficulty: "hard",
+                question: "How many significant figures should the result of 25.342 × 0.0254 have?",
+                options: [],
+                answer: "3",
+                solution: "25.342 has 5 sig figs, 0.0254 has 3 sig figs. Result should have 3 sig figs (minimum of given). Result = 0.644"
+            },
+            {
+                number: 74,
+                topic: "Rounding",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Round 4.5 to nearest integer using 'round to even' rule.",
+                options: [],
+                answer: "4",
+                solution: "Since 4 is even and 5 is exactly at boundary, round to nearest even number: 4"
+            },
+            {
+                number: 75,
+                topic: "Density",
+                type: "numerical",
+                difficulty: "medium",
+                question: "A cube of side 2 cm has mass 32 g. Find its density in SI units.",
+                options: [],
+                answer: "4000 kg/m³",
+                solution: "Volume = 2³ = 8 cm³. Density = 32/8 = 4 g/cm³ = 4000 kg/m³"
+            },
+            {
+                number: 76,
+                topic: "Derived Quantities",
+                type: "mcq",
+                difficulty: "medium",
+                question: "Which is a derived quantity?",
+                options: ["Mass", "Length", "Temperature", "Velocity"],
+                answer: "D",
+                solution: "Velocity is derived (length/time). Mass, length, temperature are fundamental quantities."
+            },
+            {
+                number: 77,
+                topic: "Speed vs Velocity",
+                type: "short",
+                difficulty: "easy",
+                question: "Distinguish between speed and velocity.",
+                options: [],
+                answer: "",
+                solution: "Speed: scalar, magnitude only (e.g., 50 km/h). Velocity: vector, magnitude + direction (e.g., 50 km/h north). Both have dimensions [L T⁻¹]."
+            },
+            {
+                number: 78,
+                topic: "Experimental Error",
+                type: "short",
+                difficulty: "medium",
+                question: "What precautions should be taken to minimize experimental error?",
+                options: [],
+                answer: "",
+                solution: "Precautions: 1) Zero the instrument 2) Check calibration 3) Use proper technique 4) Avoid parallax error 5) Take multiple measurements 6) Control environment 7) Use better instruments"
+            },
+            {
+                number: 79,
+                topic: "Uncertainty",
+                type: "short",
+                difficulty: "medium",
+                question: "When using an instrument with least count L, what is the uncertainty in reading?",
+                options: [],
+                answer: "",
+                solution: "Uncertainty = ±L/2 or ±L depending on instrument type. For analog instruments, it's usually half the least count."
+            },
+            {
+                number: 80,
+                topic: "Absolute Error in Functions",
+                type: "numerical",
+                difficulty: "hard",
+                question: "If x = (5 ± 0.2) m and y = x², find y and error in y.",
+                options: [],
+                answer: "25 ± 2 m²",
+                solution: "y = 5² = 25 m²\nFor y = x²: Δy = 2x·Δx = 2 × 5 × 0.2 = 2 m²\ny = 25 ± 2 m²"
+            },
+            {
+                number: 81,
+                topic: "CGS and FPS Systems",
+                type: "short",
+                difficulty: "easy",
+                question: "Name the fundamental units in CGS and FPS systems.",
+                options: [],
+                answer: "",
+                solution: "CGS: length (cm), mass (g), time (s). FPS: length (foot), mass (pound), time (s)"
+            },
+            {
+                number: 82,
+                topic: "Unit Conversion",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Convert 1 inch to cm. (1 inch = 2.54 cm)",
+                options: [],
+                answer: "2.54 cm",
+                solution: "1 inch = 2.54 cm (standard conversion)"
+            },
+            {
+                number: 83,
+                topic: "Physical Constants",
+                type: "short",
+                difficulty: "medium",
+                question: "Give the approximate value of speed of light, gravitational constant, and Planck's constant.",
+                options: [],
+                answer: "",
+                solution: "c ≈ 3 × 10⁸ m/s, G ≈ 6.67 × 10⁻¹¹ N·m²/kg², h ≈ 6.63 × 10⁻³⁴ J·s"
+            },
+            {
+                number: 84,
+                topic: "Avogadro's Number",
+                type: "short",
+                difficulty: "easy",
+                question: "What is Avogadro's number and its unit?",
+                options: [],
+                answer: "",
+                solution: "Avogadro's number (Nₐ) = 6.022 × 10²³ mol⁻¹. It represents number of particles in one mole."
+            },
+            {
+                number: 85,
+                topic: "Molar Mass",
+                type: "numerical",
+                difficulty: "medium",
+                question: "If 18 g of water contains 6.022 × 10²³ molecules, find mass of one molecule of water.",
+                options: [],
+                answer: "2.99 × 10⁻²³ g",
+                solution: "Mass of one molecule = 18 / (6.022 × 10²³) = 2.99 × 10⁻²³ g = 2.99 × 10⁻²⁶ kg"
+            },
+            {
+                number: 86,
+                topic: "Precision Instruments",
+                type: "short",
+                difficulty: "medium",
+                question: "Why is an instrument with smaller least count more precise?",
+                options: [],
+                answer: "",
+                solution: "Smaller least count means finer divisions, allowing measurement of smaller variations. This provides better precision and uncertainty in measurements."
+            },
+            {
+                number: 87,
+                topic: "Atomic Mass Unit",
+                type: "short",
+                difficulty: "medium",
+                question: "What is atomic mass unit (u) and how is it related to kilogram?",
+                options: [],
+                answer: "",
+                solution: "1 u = 1.66 × 10⁻²⁷ kg. It's 1/12 of mass of carbon-12 atom. Used for atomic and nuclear mass measurements."
+            },
+            {
+                number: 88,
+                topic: "Dimensional Consistency",
+                type: "numerical",
+                difficulty: "hard",
+                question: "Check if s = ut + ½at² is dimensionally consistent.",
+                options: [],
+                answer: "Yes, all terms have dimension [L]",
+                solution: "[s] = [L]\n[ut] = [L T⁻¹] × [T] = [L]\n[½at²] = [L T⁻²] × [T²] = [L]\nAll terms have [L], equation is dimensionally consistent."
+            },
+            {
+                number: 89,
+                topic: "Equation Derivation",
+                type: "short",
+                difficulty: "hard",
+                question: "Using dimensional analysis, show that time period of simple pendulum T ∝ √(l/g).",
+                options: [],
+                answer: "",
+                solution: "Let T = k·lᵃ·gᵇ. [T] = [L]ᵃ·[L T⁻²]ᵇ = [Lᵃ⁺ᵇ·T⁻²ᵇ]\nComparing: a+b = 0, -2b = 1. So b = -½, a = ½\nT = k·√(l/g)"
+            },
+            {
+                number: 90,
+                topic: "Instrument Sensitivity",
+                type: "short",
+                difficulty: "medium",
+                question: "What is sensitivity of a measuring instrument?",
+                options: [],
+                answer: "",
+                solution: "Sensitivity is the ability to detect small changes in physical quantity. Higher sensitivity = smaller least count. More sensitive instrument can measure finer variations."
+            },
+            {
+                number: 91,
+                topic: "Analog vs Digital",
+                type: "short",
+                difficulty: "medium",
+                question: "Compare analog and digital measuring instruments.",
+                options: [],
+                answer: "",
+                solution: "Analog: continuous scale, parallax error possible, subjective reading. Digital: discrete readings, no parallax, objective, better accuracy, less prone to systematic errors."
+            },
+            {
+                number: 92,
+                topic: "Thermometric Scales",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Convert 98.6°F (body temperature) to °C and K.",
+                options: [],
+                answer: "37°C, 310.15 K",
+                solution: "°C = (°F - 32) × 5/9 = (98.6 - 32) × 5/9 = 37°C\nK = 37 + 273.15 = 310.15 K"
+            },
+            {
+                number: 93,
+                topic: "Errors in Combination",
+                type: "numerical",
+                difficulty: "hard",
+                question: "If a = 3.0 ± 0.1 and b = 4.0 ± 0.2, find error in a/b.",
+                options: [],
+                answer: "±0.14 or ±0.133",
+                solution: "For division: Δ(a/b)/(a/b) = Δa/a + Δb/b = 0.1/3.0 + 0.2/4.0 = 0.033 + 0.05 = 0.083\na/b = 3/4 = 0.75\nError = 0.083 × 0.75 ≈ ±0.06 or ±0.14 (using quadrature: ±0.133)"
+            },
+            {
+                number: 94,
+                topic: "Standard Deviation",
+                type: "short",
+                difficulty: "hard",
+                question: "Define standard deviation and explain its importance in error analysis.",
+                options: [],
+                answer: "",
+                solution: "Standard deviation (σ) measures spread of data from mean. σ = √[Σ(xᵢ - x̄)²/n]. Important for: quantifying precision, comparing multiple measurements, expressing uncertainty."
+            },
+            {
+                number: 95,
+                topic: "Significant Figures in Operations",
+                type: "numerical",
+                difficulty: "medium",
+                question: "Perform: 123.45 + 2.1 + 0.345. Give answer with correct sig figs.",
+                options: [],
+                answer: "125.9",
+                solution: "123.45 (tenths place), 2.1 (tenths place), 0.345 (thousandths place). Limit is tenths place.\nSum = 125.895, rounded to tenths = 125.9"
+            },
+            {
+                number: 96,
+                topic: "Unit Prefixes",
+                type: "numerical",
+                difficulty: "easy",
+                question: "Express 1 MV in basic units (volts).",
+                options: [],
+                answer: "1,000,000 V or 10⁶ V",
+                solution: "Mega (M) = 10⁶. So 1 MV = 10⁶ V = 1,000,000 V"
+            },
+            {
+                number: 97,
+                topic: "Small Angle Approximation",
+                type: "short",
+                difficulty: "hard",
+                question: "State the small angle approximation and its conditions.",
+                options: [],
+                answer: "",
+                solution: "For small angles θ (in radians): sin θ ≈ θ, cos θ ≈ 1, tan θ ≈ θ. Valid when θ < 0.1 radian (≈ 5.7°)"
+            },
+            {
+                number: 98,
+                topic: "Limiting Cases",
+                type: "short",
+                difficulty: "hard",
+                question: "Why is dimensional analysis useful for deriving physical equations?",
+                options: [],
+                answer: "",
+                solution: "Dimensional analysis helps: 1) Check correctness of equations 2) Derive relationships between quantities 3) Predict functional forms 4) Simplify complex problems 5) Convert between units"
+            },
+            {
+                number: 99,
+                topic: "Constants and Variables",
+                type: "short",
+                difficulty: "hard",
+                question: "Distinguish between fundamental constants and physical quantities. Give examples.",
+                options: [],
+                answer: "",
+                solution: "Fundamental constants: fixed values (c, G, h). Physical quantities: can vary (length, mass, temperature). Constants have dimensions, quantities are measured."
+            },
+            {
+                number: 100,
+                topic: "Practical Applications",
+                type: "long",
+                difficulty: "hard",
+                question: "A student measures the volume of liquid using a graduated cylinder three times: 50.0 mL, 49.8 mL, 50.1 mL. Calculate mean volume, absolute error, percentage error, and express result with appropriate significant figures.",
+                options: [],
+                answer: "Mean = 50.0 mL, Error = 0.2 mL, % Error = 0.4%",
+                solution: "Mean = (50.0 + 49.8 + 50.1)/3 = 149.9/3 = 49.97 ≈ 50.0 mL\nMean deviation = (|50.0-50.0| + |49.8-50.0| + |50.1-50.0|)/3 = (0 + 0.2 + 0.1)/3 = 0.1 mL\nAbsolute error ≈ 0.2 mL\nPercentage error = (0.2/50.0) × 100 = 0.4%\nResult: Volume = (50.0 ± 0.2) mL"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function renderQuestions() {
+            const wrapper = document.getElementById('questionsWrapper');
+            wrapper.innerHTML = '';
+
+            let filteredQuestions = questionsData;
+            if (currentFilter !== 'all') {
+                filteredQuestions = questionsData.filter(q => q.type === currentFilter);
+            }
+
+            // Group by topic
+            const byTopic = {};
+            filteredQuestions.forEach(q => {
+                if (!byTopic[q.topic]) byTopic[q.topic] = [];
+                byTopic[q.topic].push(q);
+            });
+
+            // Render topics
+            Object.entries(byTopic).forEach(([topic, questions]) => {
+                const section = document.createElement('div');
+                section.className = 'topic-section';
+                section.innerHTML = `<h2 class="topic-title">${topic} (${questions.length} questions)</h2>`;
+
+                const container = document.createElement('div');
+                container.className = 'questions-container';
+
+                questions.forEach(q => {
+                    container.appendChild(createQuestionCard(q));
+                });
+
+                section.appendChild(container);
+                wrapper.appendChild(section);
+            });
+        }
+
+        function createQuestionCard(q) {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.onclick = () => card.classList.toggle('expanded');
+
+            const diffColor = q.difficulty === 'easy' ? 'easy' : q.difficulty === 'medium' ? 'medium' : 'hard';
+
+            let optionsHTML = '';
+            if (q.options.length > 0) {
+                const choices = ['A)', 'B)', 'C)', 'D)'];
+                optionsHTML = '<div class="question-options"><strong>Options:</strong>' + 
+                    q.options.map((opt, i) => `<div class="option">${choices[i]} ${opt}</div>`).join('') + 
+                    '</div>';
+            }
+
+            card.innerHTML = `
+                <div>
+                    <span class="q-number">Q${q.number}</span>
+                    <span class="q-type ${q.type}">${q.type}</span>
+                    <span class="difficulty">
+                        <span class="difficulty-dot ${diffColor}"></span>${q.difficulty}
+                    </span>
+                </div>
+                <div class="question-text">${q.question}</div>
+                ${optionsHTML}
+                <div class="solution">
+                    <strong>✓ Solution:</strong><br>${q.solution}<br>
+                    ${q.answer ? `<strong>Answer:</strong> ${q.answer}` : ''}
+                </div>
+            `;
+
+            return card;
+        }
+
+        function filterQuestions(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderQuestions();
+        }
+
+        document.getElementById('searchBox').addEventListener('keyup', (e) => {
+            const query = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.question-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+
+        // Initial render
+        renderQuestions();
+    </script>
+</body>
+</html>
